@@ -40,7 +40,7 @@ to pass in the private key location. Here's an example to upgrade from
     --private-key=~/.vagrant.d/insecure_private_key \
     -u vagrant \
     --sudo \
-    all -m shell -a 'do-release-upgrade -d'
+    all -m shell -a ping
 
 To execute specific tagged tasks from the "playbook":
 
