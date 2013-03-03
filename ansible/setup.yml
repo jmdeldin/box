@@ -29,6 +29,7 @@
         - build-essential
         - curl
         - git
+        - gnuplot-x11
         - graphviz
         - htop
         - libsqlite3-dev
@@ -37,6 +38,7 @@
         - libyaml-dev
         - python-software-properties
         - r-base-core
+        - screen
         - software-properties-common
         - sqlite3
         - texlive-latex-extra
