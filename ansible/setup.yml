@@ -4,9 +4,8 @@
 
   vars:
     ruby: ruby-2.0.0-p0
-    rvm: ~/.rvm/bin/rvm
-    gem: ~/.rvm/bin/gem
     gem_bin_path: ~/.rvm/gems/$ruby/bin
+    wd: /vagrant
 
   tasks:
     - name: set the timezone to MST
@@ -72,21 +71,37 @@
       sudo: True
       tags: [packages]
 
+    - name: clone dotfiles
+      git: repo=http://github.com/jmdeldin/dotfiles.git dest=$wd/etc
+      tags: [git]
+
+    - name: link dotfiles
+      file: path=~/$item src=$wd/etc/$item state=link
+      tags: [git]
+      with_items:
+        - .gitconfig
+        - .gitignore
+        - .screenrc
+        - .vimrc
+        - .zshenv
+        - .zshrc
+
     - name: install RVM for all users
-      shell: curl -L https://get.rvm.io | bash creates=$rvm
+      shell: curl -L https://get.rvm.io | bash -s -- --ignore-dotfiles creates=~/.rvm
       tags: [ruby]
 
     - name: install Ruby 2.0
-      shell: $rvm install --default $ruby creates=~/.rvm/rubies/$ruby
+      shell: rvm install --default $ruby creates=~/.rvm/rubies/$ruby
       tags: [ruby]
 
-    - name: install pry
-      shell: $gem list | grep -q pry || $gem install pry creates=$gem_bin_path/pry
+    - name: install base gems
+      gem: name=$item state=present include_dependencies=False
       tags: [ruby]
-
-    - name: install rails
-      shell: $gem list | grep -q rails || $gem install rails creates=$gem_bin_path/rails
-      tags: [ruby]
+      with_items:
+        - algoplot
+        - pry
+        - pry-doc
+        - rails
 
   handlers:
     - name: reconfigure tzdata
