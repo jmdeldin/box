@@ -44,8 +44,6 @@ to pass in the private key location. Here's an example to upgrade from
 
 To execute specific tagged tasks from the "playbook":
 
-(`ansible/setup.yml`):
-
     ansible-playbook -i ansible/hosts \
     --private-key=~/.vagrant.d/insecure_private_key \
     --tags "ruby" ansible/setup.yml --verbose
