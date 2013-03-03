@@ -37,6 +37,7 @@
         - libyaml-dev
         - python-software-properties
         - r-base-core
+        - software-properties-common
         - sqlite3
         - texlive-latex-extra
         - texlive-latex-recommended
