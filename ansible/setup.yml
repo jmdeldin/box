@@ -1,0 +1,91 @@
+---
+- hosts: devel
+  user: vagrant
+
+  vars:
+    ruby: ruby-2.0.0-p0
+    rvm: ~/.rvm/bin/rvm
+    gem: ~/.rvm/bin/gem
+    gem_bin_path: ~/.rvm/gems/$ruby/bin
+
+  tasks:
+    - name: set the timezone to MST
+      lineinfile: dest=/etc/timezone state=present insertbefore=BOF
+                  regexp="^America/Denver" line="America/Denver"
+      sudo: True
+      notify: [reconfigure tzdata]
+
+    - name: upgrade packages
+      apt: upgrade=yes update_cache=yes
+      sudo: True
+
+    - name: install userspace packages
+      apt: pkg=$item state=installed
+      sudo: True
+      tags: [packages]
+      with_items:
+        - ack-grep
+        - aspell-en
+        - build-essential
+        - curl
+        - git
+        - graphviz
+        - htop
+        - libsqlite3-dev
+        - libxml2-dev # Nokogiri
+        - libxslt1-dev # Nokogiri
+        - libyaml-dev
+        - python-software-properties
+        - r-base-core
+        - sqlite3
+        - texlive-latex-extra
+        - texlive-latex-recommended
+        - texlive-xetex
+        - tree
+        - update-manager-core # for do-release-upgrade -d
+        - vim
+        - wordnet
+        - xorg
+        - xstow
+        - zsh
+
+    - name: symlink ack-grep to ack
+      file: path=/usr/bin/ack src=/usr/bin/ack-grep state=link
+      sudo: True
+      tags: [packages]
+
+    - name: add the emacs24 PPA
+      apt_repository: repo=ppa:cassou/emacs
+      sudo: True
+      tags: [packages]
+
+    - name: install the latest emacs
+      apt: pkg=emacs24-nox state=installed
+      sudo: True
+      tags: [packages]
+
+    - name: switch to ZSH
+      shell: chsh -s /usr/bin/zsh $user
+      sudo: True
+      tags: [packages]
+
+    - name: install RVM for all users
+      shell: curl -L https://get.rvm.io | bash creates=$rvm
+      tags: [ruby]
+
+    - name: install Ruby 2.0
+      shell: $rvm install --default $ruby creates=~/.rvm/rubies/$ruby
+      tags: [ruby]
+
+    - name: install pry
+      shell: $gem list | grep -q pry || $gem install pry creates=$gem_bin_path/pry
+      tags: [ruby]
+
+    - name: install rails
+      shell: $gem list | grep -q rails || $gem install rails creates=$gem_bin_path/rails
+      tags: [ruby]
+
+  handlers:
+    - name: reconfigure tzdata
+      shell: dpkg-reconfigure -f noninteractive tzdata
+      sudo: True
