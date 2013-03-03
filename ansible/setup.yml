@@ -99,6 +99,7 @@
       tags: [ruby]
       with_items:
         - algoplot
+        - nokogiri
         - pry
         - pry-doc
         - rails
