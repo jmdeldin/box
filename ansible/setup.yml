@@ -86,7 +86,7 @@
         - .zshenv
         - .zshrc
 
-    - name: install RVM for all users
+    - name: install RVM
       shell: curl -L https://get.rvm.io | bash -s -- --ignore-dotfiles creates=~/.rvm
       tags: [ruby]
 
