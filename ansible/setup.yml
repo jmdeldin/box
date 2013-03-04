@@ -72,6 +72,10 @@
       sudo: True
       tags: [packages, users]
 
+    - name: create the src working directory
+      file: path=$wd state=directory
+      tags: [users]
+
     - name: clone dotfiles
       git: repo=http://github.com/jmdeldin/dotfiles.git dest=$wd/etc
       tags: [git]
