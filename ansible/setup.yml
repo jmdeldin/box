@@ -91,6 +91,10 @@
         - .zshenv
         - .zshrc
 
+    - name: clone .emacs.d
+      git: repo=http://github.com/jmdeldin/.emacs.d.git dest=$HOME/.emacs.d
+      tags: [git]
+
     - name: install RVM
       shell: curl -L https://get.rvm.io | bash -s -- --ignore-dotfiles creates=~/.rvm
       tags: [ruby]
