@@ -68,9 +68,9 @@
       tags: [packages]
 
     - name: switch to ZSH
-      shell: chsh -s /usr/bin/zsh $user
+      user: name=$user shell=/usr/bin/zsh
       sudo: True
-      tags: [packages]
+      tags: [packages, users]
 
     - name: clone dotfiles
       git: repo=http://github.com/jmdeldin/dotfiles.git dest=$wd/etc
