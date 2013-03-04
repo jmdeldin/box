@@ -6,7 +6,7 @@
     gem_bin_path: ~/.rvm/gems/$ruby/bin
     ruby: ruby-2.0.0-p0
     user: vagrant
-    wd: /vagrant
+    wd: /vagrant/src
 
   tasks:
     - name: set the timezone to MST
