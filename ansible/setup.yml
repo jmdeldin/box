@@ -27,6 +27,7 @@
         - ack-grep
         - aspell-en
         - build-essential
+        - cloc
         - curl
         - git
         - gnuplot-x11
