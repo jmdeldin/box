@@ -92,7 +92,7 @@
         - .zshrc
 
     - name: clone .emacs.d
-      git: repo=http://github.com/jmdeldin/.emacs.d.git dest=$HOME/.emacs.d
+      git: repo=http://github.com/jmdeldin/.emacs.d.git dest=~/.emacs.d
       tags: [git]
 
     - name: install RVM
