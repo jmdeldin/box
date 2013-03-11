@@ -48,6 +48,7 @@
         - tree
         - update-manager-core # for do-release-upgrade -d
         - vim
+        - whois
         - wordnet
         - xorg
         - xstow
