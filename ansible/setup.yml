@@ -42,6 +42,7 @@
         - screen
         - software-properties-common
         - sqlite3
+        - texlive-fonts-recommended
         - texlive-latex-extra
         - texlive-latex-recommended
         - texlive-xetex
