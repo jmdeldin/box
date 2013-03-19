@@ -37,6 +37,7 @@
         - libxml2-dev # Nokogiri
         - libxslt1-dev # Nokogiri
         - libyaml-dev
+        - openjdk-7-jdk
         - python-software-properties
         - r-base-core
         - screen
