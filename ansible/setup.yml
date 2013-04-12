@@ -50,6 +50,7 @@
         - tree
         - update-manager-core # for do-release-upgrade -d
         - vim
+        - wamerican # /usr/share/dict/words
         - whois
         - wordnet
         - xorg
