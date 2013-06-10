@@ -113,7 +113,6 @@
       tags: [ruby]
       with_items:
         - algoplot
-        - gem-open
         - nokogiri
         - pry
         - pry-doc
