@@ -18,9 +18,8 @@ Prerequisites
 -------------
 
 1. Install [Vagrant][vagrant] from a binary package
-2. Install [Ansible][ansible] from a Git checkout
+2. Install [Ansible][ansible]: `sudo easy_install pip && sudo pip install ansible`
 3. Install the vbguest plugin with `vagrant gem install vagrant-vbguest`
-4. Install the ansible plugin with `vagrant gem install vagrant-ansible`
 
 Setup
 -----
