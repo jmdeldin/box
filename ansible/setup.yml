@@ -2,13 +2,9 @@
 - hosts: devel
   user: jmdeldin
 
-  vars:
-    gem_bin_path: ~/.rvm/gems/$ruby/bin
-    ruby: ruby-2.0.0-p0
-    user: vagrant
-    wd: /vagrant/src
-
   tasks:
+    - include: system76.yml
+
     - name: set the timezone to PST
       lineinfile: dest=/etc/timezone state=present insertbefore=BOF
                   regexp="^America/Los_Angeles" line="America/Los_Angeles"
@@ -20,15 +16,16 @@
       sudo: True
 
     - name: install userspace packages
-      apt: pkg=$item state=installed
+      apt: pkg={{item}} state=installed
       sudo: True
       tags: [packages]
       with_items:
-        - ack-grep
         - aspell-en
         - build-essential
         - cloc
+        - chromium-browser
         - curl
+        - emacs24-nox
         - git
         - gnuplot-x11
         - graphviz
@@ -40,53 +37,29 @@
         - openjdk-7-jdk
         - python-software-properties
         - r-base-core
-        - screen
         - software-properties-common
         - sqlite3
         - texlive-fonts-recommended
         - texlive-latex-extra
         - texlive-latex-recommended
         - texlive-xetex
+        - tmux
         - tree
-        - update-manager-core # for do-release-upgrade -d
         - vim
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
-        - xorg
-        - xstow
-        - zsh
-
-    - name: symlink ack-grep to ack
-      file: path=/usr/bin/ack src=/usr/bin/ack-grep state=link
-      sudo: True
-      tags: [packages]
-
-    - name: add the emacs24 PPA
-      apt_repository: repo=ppa:cassou/emacs
-      sudo: True
-      tags: [packages]
-
-    - name: install the latest emacs
-      apt: pkg=emacs24-nox state=installed
-      sudo: True
-      tags: [packages]
-
-    - name: switch to ZSH
-      user: name=$user shell=/usr/bin/zsh
-      sudo: True
-      tags: [packages, users]
 
     - name: create the src working directory
-      file: path=$wd state=directory
+      file: path=~/src state=directory
       tags: [users]
 
     - name: clone dotfiles
-      git: repo=http://github.com/jmdeldin/dotfiles.git dest=$wd/etc
+      git: repo=http://github.com/jmdeldin/dotfiles.git dest=~/src/etc
       tags: [git]
 
     - name: link dotfiles
-      file: path=~/$item src=$wd/etc/$item state=link
+      file: path=~/{{item}} src=~/src/etc/{{item}} state=link
       tags: [git]
       with_items:
         - .gitconfig
@@ -100,12 +73,12 @@
       git: repo=http://github.com/jmdeldin/.emacs.d.git dest=~/.emacs.d
       tags: [git]
 
-    - name: install RVM
-      shell: curl -L https://get.rvm.io | bash -s -- --ignore-dotfiles creates=~/.rvm
+    - apt_repository: repo=ppa:brightbox/ruby-ng
+      sudo: True
       tags: [ruby]
 
-    - name: install Ruby 2.0
-      shell: rvm install --default $ruby creates=~/.rvm/rubies/$ruby
+    - apt: pkg=ruby2.1 state=installed
+      sudo: True
       tags: [ruby]
 
     - name: install base gems

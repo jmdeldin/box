@@ -1,0 +1,10 @@
+- name: setup System76 drivers
+  apt_repository: repo=ppa:system76-dev/stable
+  sudo: True
+  tags: [system76]
+
+- name: install system76 drivers
+  apt: pkg=system76-driver state=installed
+  sudo: True
+  tags: [system76]
+
