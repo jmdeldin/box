@@ -1,6 +1,6 @@
 ---
 - hosts: devel
-  user: vagrant
+  user: jmdeldin
 
   vars:
     gem_bin_path: ~/.rvm/gems/$ruby/bin
