@@ -9,9 +9,9 @@
     wd: /vagrant/src
 
   tasks:
-    - name: set the timezone to MST
+    - name: set the timezone to PST
       lineinfile: dest=/etc/timezone state=present insertbefore=BOF
-                  regexp="^America/Denver" line="America/Denver"
+                  regexp="^America/Los_Angeles" line="America/Los_Angeles"
       sudo: True
       notify: [reconfigure tzdata]
 
