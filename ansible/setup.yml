@@ -65,6 +65,7 @@
         - .gitconfig
         - .gitignore
         - .screenrc
+        - .tmux.conf
         - .vimrc
         - .zshenv
         - .zshrc
