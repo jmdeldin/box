@@ -54,6 +54,7 @@
       with_items:
         - percona-server-server-5.6
         - libmysqlclient-dev
+
     - name: install userspace packages
       apt: pkg={{item}} state=installed
       sudo: True
@@ -74,6 +75,7 @@
         - libyaml-dev
         - openjdk-7-jdk
         - python-software-properties
+        - pv
         - r-base-core
         - ruby2.1
         - ruby2.1-dev
