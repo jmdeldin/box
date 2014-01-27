@@ -75,13 +75,15 @@
         - graphviz
         - htop
         - imagemagick
+        - libssl-dev
         - libsqlite3-dev
         - libxml2-dev # Nokogiri
         - libxslt1-dev # Nokogiri
-        - libqt4-dev
+        - libqt4-dev # Capybara
         - libyaml-dev
         - memcached
         - openjdk-7-jdk
+        - openssl
         - python-software-properties
         - pv
         - r-base-core
@@ -101,6 +103,7 @@
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
+        - xvfb # Capybara
         - zsh
 
     - name: create the src working directory
