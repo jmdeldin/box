@@ -37,6 +37,15 @@
         - deb
         - deb-src
 
+    - name: download elasticsearch
+      get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.10.deb
+      tags: [search]
+
+    - name: install elasticsearch
+      command: dpkg -i /home/{{user}}/src/vendor/es.deb creates=/etc/init.d/elasticsearch
+      sudo: True
+      tags: [search]
+      notify: [start ES]
 
     - name: install mysql
       apt: pkg={{item}} state=installed
@@ -125,4 +134,8 @@
   handlers:
     - name: reconfigure tzdata
       shell: dpkg-reconfigure -f noninteractive tzdata
+      sudo: True
+
+    - name: start ES
+      shell: service elasticsearch start
       sudo: True
