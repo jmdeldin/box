@@ -2,6 +2,9 @@
 - hosts: devel
   user: jmdeldin
 
+  vars:
+    user: jmdeldin
+
   tasks:
     - include: system76.yml
 
@@ -49,6 +52,7 @@
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
+        - zsh
 
     - name: create the src working directory
       file: path=~/src state=directory
@@ -69,6 +73,11 @@
         - .vimrc
         - .zshenv
         - .zshrc
+
+    - name: switch to ZSH
+      user: name={{user}} shell=/usr/bin/zsh
+      sudo: True
+      tags: [packages, users]
 
     - name: clone .emacs.d
       git: repo=http://github.com/jmdeldin/.emacs.d.git dest=~/.emacs.d
