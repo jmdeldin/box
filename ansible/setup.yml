@@ -18,6 +18,10 @@
       apt: upgrade=yes update_cache=yes
       sudo: True
 
+    - apt_repository: repo=ppa:brightbox/ruby-ng
+      sudo: True
+      tags: [packages]
+
     - name: install userspace packages
       apt: pkg={{item}} state=installed
       sudo: True
@@ -40,6 +44,8 @@
         - openjdk-7-jdk
         - python-software-properties
         - r-base-core
+        - ruby2.1
+        - ruby-dev
         - software-properties-common
         - sqlite3
         - texlive-fonts-recommended
@@ -83,19 +89,12 @@
       git: repo=http://github.com/jmdeldin/.emacs.d.git dest=~/.emacs.d
       tags: [git]
 
-    - apt_repository: repo=ppa:brightbox/ruby-ng
-      sudo: True
-      tags: [ruby]
-
-    - apt: pkg=ruby2.1 state=installed
-      sudo: True
-      tags: [ruby]
-
     - name: install base gems
-      gem: name=$item state=present include_dependencies=False
+      gem: name={{item}} user_install=yes state=present include_dependencies=True
       tags: [ruby]
       with_items:
         - algoplot
+        - bundler
         - nokogiri
         - pry
         - pry-doc
