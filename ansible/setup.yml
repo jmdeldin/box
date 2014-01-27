@@ -22,6 +22,29 @@
       sudo: True
       tags: [packages]
 
+    # TODO: Future versions of ansible fix the apt_key module to behave
+    # like...apt-key
+    - name: "add Percona's key"
+      shell: apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+      sudo: True
+      tags: [mysql]
+
+    - name: add repo for Percona
+      apt_repository: repo='{{item}} http://repo.percona.com/apt saucy main'
+      sudo: True
+      tags: [mysql]
+      with_items:
+        - deb
+        - deb-src
+
+
+    - name: install mysql
+      apt: pkg={{item}} state=installed
+      sudo: True
+      tags: [mysql, packages]
+      with_items:
+        - percona-server-server-5.6
+        - libmysqlclient-dev
     - name: install userspace packages
       apt: pkg={{item}} state=installed
       sudo: True
