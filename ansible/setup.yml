@@ -28,7 +28,7 @@
         - cloc
         - chromium-browser
         - curl
-        - emacs24-nox
+        - emacs24
         - git
         - gnuplot-x11
         - graphviz
