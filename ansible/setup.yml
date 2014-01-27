@@ -132,10 +132,12 @@
       with_items:
         - algoplot
         - bundler
+        - db-rotator
         - nokogiri
         - pry
         - pry-doc
         - rails
+        - zeus
 
   handlers:
     - name: reconfigure tzdata
