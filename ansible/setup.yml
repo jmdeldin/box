@@ -76,7 +76,8 @@
         - python-software-properties
         - r-base-core
         - ruby2.1
-        - ruby-dev
+        - ruby2.1-dev
+        - ruby-switch
         - software-properties-common
         - sqlite3
         - texlive-fonts-recommended
@@ -119,6 +120,11 @@
     - name: clone .emacs.d
       git: repo=http://github.com/jmdeldin/.emacs.d.git dest=~/.emacs.d
       tags: [git]
+
+    - name: set ruby version
+      command: ruby-switch --set ruby2.1
+      sudo: True
+      tags: [ruby]
 
     - name: install base gems
       gem: name={{item}} user_install=yes state=present include_dependencies=True
