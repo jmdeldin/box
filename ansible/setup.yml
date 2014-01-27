@@ -74,6 +74,7 @@
         - gnuplot-x11
         - graphviz
         - htop
+        - imagemagick
         - libsqlite3-dev
         - libxml2-dev # Nokogiri
         - libxslt1-dev # Nokogiri
