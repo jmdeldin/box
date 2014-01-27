@@ -30,7 +30,6 @@
         - aspell-en
         - build-essential
         - cloc
-        - chromium-browser
         - curl
         - emacs24
         - git
