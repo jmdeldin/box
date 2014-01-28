@@ -9,6 +9,7 @@
   tags: [system76, packages]
   with_items:
     - chromium-browser
+    - gcolor2 # color picker
     - gnome-tweak-tool # set Emacs keybindings + caps lock
     - system76-driver
     - unity-tweak-tool
