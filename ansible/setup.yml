@@ -59,6 +59,7 @@
       copy: src=templates/etc/mysql/my.cnf dest=/etc/mysql/my.cnf
       sudo: True
       tags: [mysql]
+      notify: [restart MySQL]
 
     - name: install userspace packages
       apt: pkg={{item}} state=installed
