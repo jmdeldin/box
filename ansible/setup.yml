@@ -91,6 +91,7 @@
         - ruby2.1
         - ruby2.1-dev
         - ruby-switch
+        - silversearcher-ag
         - software-properties-common
         - sqlite3
         - texlive-fonts-recommended
