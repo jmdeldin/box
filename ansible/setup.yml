@@ -165,3 +165,7 @@
     - name: restart MySQL
       shell: service mysql restart
       sudo: True
+
+    - name: rebuild boot image
+      command: update-initramfs -u
+      sudo: True
