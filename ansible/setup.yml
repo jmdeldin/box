@@ -99,6 +99,7 @@
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
+        - xsel
         - xvfb # Capybara
         - zsh
 
