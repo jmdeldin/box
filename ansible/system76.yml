@@ -15,6 +15,15 @@
     - system76-driver
     - unity-tweak-tool
 
+- name: remove garbage packages
+  apt: pkg={{item}} state=absent purge=yes
+  sudo: True
+  tags: [system76, packages]
+  with_items:
+    - empathy
+    - thunderbird
+    - unity-lens-shopping
+
 # SSD optimizations
 # https://wiki.debian.org/SSDOptimization
 # http://blog.christophersmart.com/2013/06/05/trim-on-lvm-on-luks-on-ssd/
