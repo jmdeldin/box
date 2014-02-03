@@ -11,6 +11,7 @@
     - chromium-browser
     - gcolor2 # color picker
     - gnome-tweak-tool # set Emacs keybindings + caps lock
+    - pidgin
     - system76-driver
     - unity-tweak-tool
 
