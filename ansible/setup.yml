@@ -37,6 +37,10 @@
         - deb
         - deb-src
 
+    - name: create the src working directory
+      file: path=~/src/vendor state=directory
+      tags: [users]
+
     - name: download elasticsearch
       get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.10.deb
       tags: [search]
@@ -108,10 +112,6 @@
       sudo: True
       tags: [mysql]
       notify: [restart MySQL]
-
-    - name: create the src working directory
-      file: path=~/src state=directory
-      tags: [users]
 
     - name: clone dotfiles
       git: repo=http://github.com/jmdeldin/dotfiles.git dest=~/src/etc
