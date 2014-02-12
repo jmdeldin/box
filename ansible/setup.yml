@@ -141,7 +141,7 @@
       tags: [packages, users]
 
     - name: clone .emacs.d
-      git: repo=http://github.com/jmdeldin/.emacs.d.git dest=~/.emacs.d
+      git: repo=git@github.com:jmdeldin/.emacs.d.git dest=~/.emacs.d
       tags: [git]
 
     - name: set ruby version
