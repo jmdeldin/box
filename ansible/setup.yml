@@ -87,6 +87,7 @@
         - memcached
         - openjdk-7-jdk
         - openssl
+        - openssh-server
         - python-software-properties
         - pv
         - r-base-core
@@ -155,6 +156,7 @@
         - algoplot
         - bundler
         - db-rotator
+        - mailcatcher
         - nokogiri
         - pry
         - pry-doc
