@@ -156,6 +156,7 @@
         - algoplot
         - bundler
         - db-rotator
+        - hitch
         - mailcatcher
         - nokogiri
         - pry
