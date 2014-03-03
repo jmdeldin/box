@@ -88,6 +88,7 @@
         - openjdk-7-jdk
         - openssl
         - openssh-server
+        - postgresql
         - python-software-properties
         - pv
         - r-base-core
