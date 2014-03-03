@@ -18,10 +18,6 @@
       apt: upgrade=yes update_cache=yes
       sudo: True
 
-    - apt_repository: repo=ppa:brightbox/ruby-ng
-      sudo: True
-      tags: [packages]
-
     - apt_repository: repo=ppa:hansjorg/rust
       sudo: True
       tags: [packages]
@@ -94,9 +90,6 @@
         - pv
         - r-base-core
         - redis-server
-        - ruby2.1
-        - ruby2.1-dev
-        - ruby-switch
         - rust-0.9
         - silversearcher-ag
         - software-properties-common
@@ -146,14 +139,26 @@
       git: repo=git@github.com:jmdeldin/.emacs.d.git dest=~/.emacs.d
       tags: [git]
 
-    - name: set ruby version
-      command: ruby-switch --set ruby2.1
-      sudo: True
+    - name: setup rbenv
+      git: repo=git@github.com:sstephenson/rbenv.git dest=~/.rbenv
+      tags: [ruby]
+
+    - name: setup ruby-build
+      git: repo=git@github.com:sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+      tags: [ruby]
+
+    - name: build ruby version
+      command: rbenv install 2.1.1 creates=~/.rbenv/versions/2.1.1
+      tags: [ruby]
+
+    - name: set global version
+      command: rbenv global 2.1.1
       tags: [ruby]
 
     - name: install base gems
-      gem: name={{item}} user_install=yes state=present include_dependencies=True
+      gem: name={{item}} state=present include_dependencies=True
       tags: [ruby]
+      notify: [rehash ruby gems]
       with_items:
         - algoplot
         - bundler
@@ -182,3 +187,6 @@
     - name: rebuild boot image
       command: update-initramfs -u
       sudo: True
+
+    - name: rehash ruby gems
+      command: rbenv rehash
