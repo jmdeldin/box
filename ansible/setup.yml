@@ -42,7 +42,7 @@
       tags: [users]
 
     - name: download elasticsearch
-      get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.10.deb
+      get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb
       tags: [search]
 
     - name: install elasticsearch
