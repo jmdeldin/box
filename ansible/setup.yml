@@ -171,6 +171,17 @@
         - rails
         - zeus
 
+    - name: copy iptables
+      copy: src=templates/etc/iptables.rules dest=/etc/iptables.rules
+      sudo: True
+      tags: [net]
+
+    - name: load iptables
+      lineinfile: dest=/etc/network/interfaces state=present
+                  line="pre-up iptables-restore < /etc/iptables.rules"
+      tags: [net]
+      sudo: True
+
   handlers:
     - name: reconfigure tzdata
       shell: dpkg-reconfigure -f noninteractive tzdata
