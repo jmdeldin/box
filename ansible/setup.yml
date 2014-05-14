@@ -1,9 +1,5 @@
 ---
 - hosts: devel
-  user: jmdeldin
-
-  vars:
-    user: jmdeldin
 
   tasks:
     - include: system76.yml
@@ -47,7 +43,7 @@
       tags: [search]
 
     - name: install elasticsearch
-      command: dpkg -i /home/{{user}}/src/vendor/es.deb creates=/etc/init.d/elasticsearch
+      command: dpkg -i ~/src/vendor/es.deb creates=/etc/init.d/elasticsearch
       sudo: True
       tags: [search]
       notify: [start ES]

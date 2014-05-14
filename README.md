@@ -14,7 +14,7 @@ Included Packages
 -----------------
 
 This environment is geared towards Ruby, R, and LaTeX, but for the full
-list of packages, take a look at `ansible/setup.yml`. 
+list of packages, take a look at `ansible/setup.yml`.
 
 Prerequisites
 -------------
@@ -35,7 +35,7 @@ To execute specific tagged tasks from the "playbook":
 
 To run the entire playbook:
 
-    ansible-playbook -i ansible/hosts ansible/setup.yml -K
+    ansible-playbook -i ansible/hosts ansible/setup.yml -K --extra-vars user=$USER
 
 Author
 ------
