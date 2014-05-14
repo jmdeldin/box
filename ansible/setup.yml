@@ -116,7 +116,7 @@
       notify: [restart MySQL]
 
     - name: clone dotfiles
-      git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc
+      git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc accept_hostkey=yes
       tags: [git]
 
     - name: link dotfiles
