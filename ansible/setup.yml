@@ -17,6 +17,7 @@
     - name: upgrade packages
       apt: upgrade=yes update_cache=yes
       sudo: True
+      tags: [maintenance]
 
     - apt_repository: repo=ppa:hansjorg/rust
       sudo: True
