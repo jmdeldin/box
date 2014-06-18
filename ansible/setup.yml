@@ -82,7 +82,7 @@
         - openssl
         - openssh-server
         - postgresql
-        - postgresql-server-dev-9.1
+        - postgresql-server-dev-9.3
         - python-software-properties
         - pv
         - r-base-core
