@@ -9,9 +9,12 @@
   tags: [system76, packages]
   with_items:
     - chromium-browser
+    - ecryptfs-utils
     - gcolor2 # color picker
     - gimp
     - gnome-tweak-tool # set Emacs keybindings + caps lock
+    - mpd
+    - ncmpc
     - pidgin
     - system76-driver
     - unity-tweak-tool
