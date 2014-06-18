@@ -38,15 +38,6 @@
       file: path=~/src/vendor state=directory
       tags: [users]
 
-    - name: download elasticsearch
-      get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb
-      tags: [search]
-
-    - name: install elasticsearch
-      command: dpkg -i ~/src/vendor/es.deb creates=/etc/init.d/elasticsearch
-      sudo: True
-      tags: [search]
-      notify: [start ES]
 
     - name: install mysql
       apt: pkg={{item}} state=installed
@@ -103,6 +94,16 @@
         - xsel
         - xvfb # Capybara
         - zsh
+
+    - name: download elasticsearch
+      get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb
+      tags: [search]
+
+    - name: install elasticsearch
+      command: dpkg -i /home/{{user}}/src/vendor/es.deb creates=/etc/init.d/elasticsearch
+      sudo: True
+      tags: [search]
+      notify: [start ES]
 
     - name: copy my.cnf
       copy: src=templates/etc/mysql/my.cnf dest=/etc/mysql/my.cnf
