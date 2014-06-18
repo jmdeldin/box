@@ -67,6 +67,7 @@
         - libxml2-dev # Nokogiri
         - libxslt1-dev # Nokogiri
         - libqt4-dev # Capybara
+        - libtidy-0.99-0
         - libyaml-dev
         - memcached
         - openjdk-7-jdk
