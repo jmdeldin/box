@@ -19,10 +19,6 @@
       sudo: True
       tags: [maintenance]
 
-    - apt_repository: repo=ppa:hansjorg/rust
-      sudo: True
-      tags: [packages]
-
     # TODO: Future versions of ansible fix the apt_key module to behave
     # like...apt-key
     - name: "add Percona's key"
@@ -91,7 +87,6 @@
         - pv
         - r-base-core
         - redis-server
-        - rust-0.9
         - silversearcher-ag
         - software-properties-common
         - sqlite3
