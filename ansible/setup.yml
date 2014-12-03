@@ -1,9 +1,10 @@
 ---
 - hosts: devel
 
-  tasks:
-    - include: system76.yml
+  vars:
+    ubuntu: utopic
 
+  tasks:
     - name: install aptitude first
       apt: pkg=aptitude state=installed
       sudo: True
