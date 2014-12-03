@@ -90,11 +90,11 @@
       tags: [ruby]
 
     - name: build ruby version
-      command: rbenv install 2.1.1 creates=~/.rbenv/versions/2.1.1
+      command: rbenv install 2.1.5 creates=~/.rbenv/versions/2.1.5
       tags: [ruby]
 
     - name: set global version
-      command: rbenv global 2.1.1
+      command: rbenv global 2.1.5
       tags: [ruby]
 
     - name: install base gems
