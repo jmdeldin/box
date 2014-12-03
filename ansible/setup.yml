@@ -4,12 +4,6 @@
   tasks:
     - include: system76.yml
 
-    - name: set the timezone to PST
-      lineinfile: dest=/etc/timezone state=present insertbefore=BOF
-                  regexp="^America/Los_Angeles" line="America/Los_Angeles"
-      sudo: True
-      notify: [reconfigure tzdata]
-
     - name: install aptitude first
       apt: pkg=aptitude state=installed
       sudo: True
@@ -186,10 +180,6 @@
       sudo: True
 
   handlers:
-    - name: reconfigure tzdata
-      shell: dpkg-reconfigure -f noninteractive tzdata
-      sudo: True
-
     - name: start ES
       shell: service elasticsearch start
       sudo: True
