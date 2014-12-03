@@ -13,14 +13,10 @@
   with_items:
     - chromium-browser
     - ecryptfs-utils
-    - gcolor2 # color picker
     - gimp
     - gnome-tweak-tool # set Emacs keybindings + caps lock
-    - mpd
-    - ncmpc
-    - pidgin
     - system76-driver
-    - unity-tweak-tool
+    - unity-tweak-tool # remove desktop from alt-tab
 
 - name: remove garbage packages
   apt: pkg={{item}} state=absent purge=yes
