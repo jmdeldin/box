@@ -94,7 +94,7 @@
       tags: [ruby]
 
     - name: set global version
-      command: rbenv global 2.1.5
+      command: rbenv global 2.1.5 creates=~/.rbenv/version
       tags: [ruby]
 
     - name: install base gems
