@@ -58,7 +58,7 @@
       tags: [users]
 
     - name: clone dotfiles
-      git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc
+      git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc update=False
       tags: [git]
 
     - name: link dotfiles
@@ -78,15 +78,15 @@
       tags: [packages, users]
 
     - name: clone .emacs.d
-      git: repo=git@github.com:jmdeldin/.emacs.d.git dest=~/.emacs.d
+      git: repo=git@github.com:jmdeldin/.emacs.d.git dest=~/.emacs.d update=False
       tags: [git]
 
     - name: setup rbenv
-      git: repo=git@github.com:sstephenson/rbenv.git dest=~/.rbenv
+      git: repo=git@github.com:sstephenson/rbenv.git dest=~/.rbenv update=False
       tags: [ruby]
 
     - name: setup ruby-build
-      git: repo=git@github.com:sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+      git: repo=git@github.com:sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build update=False
       tags: [ruby]
 
     - name: build ruby version
