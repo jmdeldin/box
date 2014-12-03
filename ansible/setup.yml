@@ -120,14 +120,12 @@
       tags: [net]
       sudo: True
 
-    - include: system76.yml
+    - include: system76_tasks.yml
     - include: theclymb_tasks.yml
 
   handlers:
+    - include: system76_handlers.yml
     - include: theclymb_handlers.yml
-    - name: rebuild boot image
-      command: update-initramfs -u
-      sudo: True
 
     - name: rehash ruby gems
       command: rbenv rehash
