@@ -47,7 +47,6 @@
         # - texlive-xetex
         - tmux
         - tree
-        - vim
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
