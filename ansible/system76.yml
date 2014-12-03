@@ -1,7 +1,10 @@
-- name: setup System76 drivers
-  apt_repository: repo=ppa:system76-dev/stable
+- name: add System76 repo
   sudo: True
   tags: [system76]
+  apt_repository: repo='{{item}} http://ppa.launchpad.net/system76-dev/stable/ubuntu {{ubuntu}} main'
+  with_items:
+    - deb
+    - deb-src
 
 - name: install system76 drivers & other GUI software
   apt: pkg={{item}} state=installed
