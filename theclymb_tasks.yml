@@ -38,6 +38,7 @@
 
 - name: install ruby gem lib dependencies
   apt: pkg={{item}} state=installed
+  tags: [packages, ruby]
   sudo: True
   with_items:
     - libqt5webkit5-dev # capybara
@@ -45,6 +46,7 @@
     - libtidy-0.99-0    # tidy_ffi
     - libxslt1-dev      # ruby-xslt
     - memcached         # dalli
+    - pngquant
     - qt5-default       # capybara
     - redis-server      # redis
     - xvfb              # capybara
@@ -52,6 +54,7 @@
 - name: install base gems
   gem: name={{item}} state=present include_dependencies=True
   notify: [rehash ruby gems]
+  tags: [ruby]
   with_items:
     - db-rotator
     - mailcatcher
