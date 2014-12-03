@@ -43,10 +43,6 @@
   sudo: True
   notify: [rebuild boot image]
 
-- cron: name="trim /" hour="9,16" job="fstrim /"
-  sudo: True
-  tags: [system76]
-
-- cron: name="trim home" hour="9,16" job="fstrim /home"
+- cron: name="trim /" hour="10" job="fstrim /"
   sudo: True
   tags: [system76]
