@@ -27,15 +27,15 @@ Executing Ansible Commands
 
 To run an arbitrary command:
 
-    ansible -i ansible/hosts all -m shell -a 'echo hi'
+    ansible -i hosts all -m shell -a 'echo hi'
 
 To execute specific tagged tasks from the "playbook":
 
-    ansible-playbook -i ansible/hosts --tags "ruby" ansible/main.yml
+    ansible-playbook -i hosts --tags "ruby" main.yml
 
 To run the entire playbook:
 
-    ansible-playbook -K -i ansible/hosts ansible/main.yml
+    ansible-playbook -K -i hosts main.yml
 
 Author
 ------
