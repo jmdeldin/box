@@ -36,8 +36,7 @@
         - libssl-dev # rbenv
         - openssh-server # TODO setup etc config
         - postgresql
-        - postgresql-server-dev-9.3
-        - python-software-properties
+        - postgresql-server-dev-9.4
         - pv
         # - r-base-core
         - silversearcher-ag
