@@ -73,7 +73,7 @@
         - .zshrc
 
     - name: switch to ZSH
-      user: name={{user}} shell=/usr/bin/zsh
+      user: name={{ansible_ssh_user}} shell=/usr/bin/zsh
       sudo: True
       tags: [packages, users]
 
