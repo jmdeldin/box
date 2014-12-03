@@ -9,38 +9,14 @@
       apt: pkg=aptitude state=installed
       sudo: True
 
-    - name: upgrade packages
-      apt: upgrade=yes update_cache=yes
+    # TODO: Remove when 24.4 is in stable
+    - name: add emacs repos
+      apt_repository: repo='{{item}} http://ppa.launchpad.net/ubuntu-elisp/ppa/ubuntu {{ubuntu}} main'
       sudo: True
-      tags: [maintenance]
-
-    # TODO: Future versions of ansible fix the apt_key module to behave
-    # like...apt-key
-    - name: "add Percona's key"
-      shell: apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
-      sudo: True
-      tags: [mysql]
-
-    - name: add repo for Percona
-      apt_repository: repo='{{item}} http://repo.percona.com/apt saucy main'
-      sudo: True
-      tags: [mysql]
+      tags: [emacs]
       with_items:
         - deb
         - deb-src
-
-    - name: create the src working directory
-      file: path=~/src/vendor state=directory
-      tags: [users]
-
-
-    - name: install mysql
-      apt: pkg={{item}} state=installed
-      sudo: True
-      tags: [mysql, packages]
-      with_items:
-        - percona-server-server-5.6
-        - libmysqlclient-dev
 
     - name: install userspace packages
       apt: pkg={{item}} state=installed
@@ -51,36 +27,25 @@
         - build-essential
         - cloc
         - curl
-        - emacs24
+        - emacs-snapshot
         - git
         - gnuplot-x11
         - graphviz
         - htop
         - imagemagick
-        - libssl-dev
-        - libsqlite3-dev
-        - libxml2-dev # Nokogiri
-        - libxslt1-dev # Nokogiri
-        - libqt4-dev # Capybara
-        - libtidy-0.99-0
-        - libyaml-dev
-        - memcached
-        - openjdk-7-jdk
-        - openssl
-        - openssh-server
+        - libssl-dev # rbenv
+        - openssh-server # TODO setup etc config
         - postgresql
         - postgresql-server-dev-9.3
         - python-software-properties
         - pv
-        - r-base-core
-        - redis-server
+        # - r-base-core
         - silversearcher-ag
-        - software-properties-common
         - sqlite3
-        - texlive-fonts-recommended
-        - texlive-latex-extra
-        - texlive-latex-recommended
-        - texlive-xetex
+        # - texlive-fonts-recommended
+        # - texlive-latex-extra
+        # - texlive-latex-recommended
+        # - texlive-xetex
         - tmux
         - tree
         - vim
@@ -88,32 +53,14 @@
         - whois
         - wordnet
         - xsel
-        - xvfb # Capybara
         - zsh
 
-    - name: download elasticsearch
-      get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb
-      tags: [search]
-
-    - name: install elasticsearch
-      command: dpkg -i /home/{{user}}/src/vendor/es.deb creates=/etc/init.d/elasticsearch
-      sudo: True
-      tags: [search]
-      notify: [start ES]
-
-    - name: start ES at boot
-      service: name=elasticsearch enabled=yes state=started
-      tags: [search]
-      sudo: True
-
-    - name: copy my.cnf
-      copy: src=templates/etc/mysql/my.cnf dest=/etc/mysql/my.cnf
-      sudo: True
-      tags: [mysql]
-      notify: [restart MySQL]
+    - name: create the src working directory
+      file: path=~/src/vendor state=directory
+      tags: [users]
 
     - name: clone dotfiles
-      git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc accept_hostkey=yes
+      git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc
       tags: [git]
 
     - name: link dotfiles
@@ -124,7 +71,6 @@
         - .gitignore
         - .screenrc
         - .tmux.conf
-        - .vimrc
         - .zshenv
         - .zshrc
 
@@ -159,15 +105,11 @@
       notify: [rehash ruby gems]
       with_items:
         - algoplot
+        - benchmark-ips
         - bundler
-        - db-rotator
         - hitch
-        - mailcatcher
-        - nokogiri
         - pry
         - pry-doc
-        - rails
-        - zeus
 
     - name: copy iptables
       copy: src=templates/etc/iptables.rules dest=/etc/iptables.rules
@@ -180,15 +122,11 @@
       tags: [net]
       sudo: True
 
+    - include: system76.yml
+    - include: theclymb_tasks.yml
+
   handlers:
-    - name: start ES
-      shell: service elasticsearch start
-      sudo: True
-
-    - name: restart MySQL
-      shell: service mysql restart
-      sudo: True
-
+    - include: theclymb_handlers.yml
     - name: rebuild boot image
       command: update-initramfs -u
       sudo: True
