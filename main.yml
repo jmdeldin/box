@@ -34,6 +34,8 @@
         - htop
         - imagemagick
         - libssl-dev # rbenv
+        - libreadline-dev # rbenv
+        - libyaml-dev # rbenv
         - openssh-server # TODO setup etc config
         - postgresql
         - postgresql-server-dev-9.4
