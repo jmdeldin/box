@@ -60,3 +60,15 @@
     - db-rotator
     - mailcatcher
     - zeus
+
+- name: install other utilities
+  apt: pkg={{item}} state=installed
+  sudo: True
+  tags: [packages]
+  with_items:
+    - unrar # modern.ie VMs
+    - wkhtmltopdf
+
+- name: symlink wkhtmltopdf to somewhere the ruby gem knows
+  file: path=/usr/local/bin/wkhtmltopdf src=/usr/bin/wkhtmltopdf state=link
+  sudo: True
