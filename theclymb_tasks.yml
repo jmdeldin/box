@@ -46,6 +46,7 @@
     - libxslt1-dev      # ruby-xslt
     - memcached         # dalli
     - nodejs
+    - npm
     - pngquant
     - qt5-default       # capybara
     - redis-server      # redis
