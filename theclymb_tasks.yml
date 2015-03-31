@@ -43,7 +43,6 @@
   with_items:
     - libqt5webkit5-dev # capybara
     - libsqlite3-dev    # mailcatcher gem
-    - libtidy-0.99-0    # tidy_ffi
     - libxslt1-dev      # ruby-xslt
     - memcached         # dalli
     - nodejs
