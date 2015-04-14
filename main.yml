@@ -54,6 +54,7 @@
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
+        - xournal
         - xsel
         - zsh
 
