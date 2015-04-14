@@ -67,6 +67,7 @@
   tags: [packages]
   with_items:
     - unrar # modern.ie VMs
+    - virtualbox
     - wkhtmltopdf
 
 - name: symlink wkhtmltopdf to somewhere the ruby gem knows
