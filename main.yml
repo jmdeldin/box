@@ -16,7 +16,10 @@
       tags: [emacs]
       with_items:
         - deb
-        - deb-src
+
+    - apt_repository: repo=ppa:hansjorg/rust
+      sudo: True
+      tags: [packages]
 
     - name: install userspace packages
       apt: pkg={{item}} state=installed
@@ -43,6 +46,7 @@
         - postgresql-server-dev-9.4
         - pv
         # - r-base-core
+        - rust-1.0.0-beta
         - silversearcher-ag
         - sqlite3
         # - texlive-fonts-recommended
