@@ -40,6 +40,8 @@
         - libssl-dev # rbenv
         - libreadline-dev # rbenv
         - libyaml-dev # rbenv
+        - ocaml
+        - opam
         - openjdk-8-jdk
         - openssh-server # TODO setup etc config
         - postgresql
