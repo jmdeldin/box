@@ -48,6 +48,7 @@
         - postgresql-server-dev-9.4
         - pv
         # - r-base-core
+        - rlwrap
         - rust-1.0.0-beta
         - silversearcher-ag
         - sqlite3
