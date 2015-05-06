@@ -118,6 +118,12 @@
         - pry
         - pry-doc
 
+    - name: disable password ssh
+      lineinfile: dest=/etc/ssh/sshd_config state=present
+                  line="PasswordAuthentication no"
+      tags: [net]
+      sudo: True
+
     - name: copy iptables
       copy: src=templates/etc/iptables.rules dest=/etc/iptables.rules
       sudo: True
