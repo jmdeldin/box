@@ -2,12 +2,12 @@
 - name: "add Percona's key"
   apt_key: keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A
   sudo: True
-  tags: [mysql]
+  tags: [mysql, theclymb]
 
 - name: add repo for Percona
   apt_repository: repo='{{item}} http://repo.percona.com/apt {{ubuntu}} main'
   sudo: True
-  tags: [mysql]
+  tags: [mysql, theclymb]
   with_items:
     - deb
     - deb-src
@@ -15,7 +15,7 @@
 - name: install mysql
   apt: pkg={{item}} state=installed
   sudo: True
-  tags: [mysql, packages]
+  tags: [mysql, packages, theclymb]
   with_items:
     - percona-server-server-5.6
     - libmysqlclient-dev
@@ -23,22 +23,22 @@
 - name: copy my.cnf
   copy: src=templates/etc/mysql/my.cnf dest=/etc/mysql/my.cnf
   sudo: True
-  tags: [mysql]
+  tags: [mysql, theclymb]
   notify: [restart MySQL]
 
 - name: download elasticsearch
   get_url: dest=~/src/vendor/es.deb url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.1.deb
-  tags: [search]
+  tags: [search, theclymb]
 
 - name: install elasticsearch
   command: dpkg -i /home/{{ansible_ssh_user}}/src/vendor/es.deb creates=/etc/init.d/elasticsearch
   sudo: True
-  tags: [search]
+  tags: [search, theclymb]
   notify: [start ES]
 
 - name: install ruby gem lib dependencies
   apt: pkg={{item}} state=installed
-  tags: [packages, ruby]
+  tags: [packages, ruby, theclymb]
   sudo: True
   with_items:
     - libqt5webkit5-dev # capybara
@@ -55,7 +55,7 @@
 - name: install base gems
   gem: name={{item}} state=present include_dependencies=True
   notify: [rehash ruby gems]
-  tags: [ruby]
+  tags: [ruby, theclymb]
   with_items:
     - db-rotator
     - mailcatcher
@@ -64,7 +64,7 @@
 - name: install other utilities
   apt: pkg={{item}} state=installed
   sudo: True
-  tags: [packages]
+  tags: [packages, theclymb]
   with_items:
     - unrar # modern.ie VMs
     - virtualbox
