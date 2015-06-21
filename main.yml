@@ -2,7 +2,7 @@
 - hosts: devel
 
   vars:
-    ubuntu: utopic
+    ubuntu: vivid
 
   tasks:
     - name: install aptitude first
@@ -28,6 +28,7 @@
       with_items:
         - aspell-en
         - build-essential
+        - chicken-bin # chicken scheme
         - cloc
         - curl
         - emacs-snapshot
@@ -53,10 +54,10 @@
         - rust-1.0.0-beta
         - silversearcher-ag
         - sqlite3
-        # - texlive-fonts-recommended
-        # - texlive-latex-extra
-        # - texlive-latex-recommended
-        # - texlive-xetex
+        - texlive-fonts-recommended
+        - texlive-latex-extra
+        - texlive-latex-recommended
+        - texlive-xetex
         - tmux
         - tree
         - wamerican # /usr/share/dict/words
