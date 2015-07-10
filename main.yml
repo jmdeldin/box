@@ -9,14 +9,6 @@
       apt: pkg=aptitude state=installed
       sudo: True
 
-    # TODO: Remove when 24.4 is in stable
-    - name: add emacs repos
-      apt_repository: repo='{{item}} http://ppa.launchpad.net/ubuntu-elisp/ppa/ubuntu {{ubuntu}} main'
-      sudo: True
-      tags: [emacs]
-      with_items:
-        - deb
-
     - apt_repository: repo=ppa:hansjorg/rust
       sudo: True
       tags: [packages]
@@ -31,7 +23,7 @@
         - chicken-bin # chicken scheme
         - cloc
         - curl
-        - emacs-snapshot
+        - emacs24
         - git
         - gnuplot-x11
         - graphviz
