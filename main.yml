@@ -133,11 +133,9 @@
       sudo: True
 
     - include: system76_tasks.yml
-    - include: theclymb_tasks.yml
 
   handlers:
     - include: system76_handlers.yml
-    - include: theclymb_handlers.yml
 
     - name: rehash ruby gems
       command: rbenv rehash

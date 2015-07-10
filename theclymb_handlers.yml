@@ -1,7 +1,0 @@
-- name: start ES
-  shell: service elasticsearch start
-  sudo: True
-
-- name: restart MySQL
-  shell: service mysql restart
-  sudo: True
