@@ -2,10 +2,12 @@
 - name: add System76 repo
   sudo: True
   tags: [system76]
-  apt_repository: repo='{{item}} http://ppa.launchpad.net/system76-dev/stable/ubuntu {{ubuntu}} main'
-  with_items:
-    - deb
-    - deb-src
+  apt_repository: repo=ppa:system76-dev/stable
+
+- name: stupid flash workaround for DRM
+  sudo: True
+  tags: [system76]
+  apt_repository: repo=ppa:mjblenner/ppa-hal
 
 - name: install system76 drivers & other GUI software
   apt: pkg={{item}} state=installed
@@ -15,6 +17,7 @@
     - chromium-browser
     - ecryptfs-utils
     - gimp
+    - hal
     - gnome-tweak-tool # set Emacs keybindings + caps lock
     - system76-driver
     - unity-tweak-tool # remove desktop from alt-tab
