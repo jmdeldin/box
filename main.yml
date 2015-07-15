@@ -34,18 +34,22 @@
         - libreadline-dev # rbenv
         - libyaml-dev # rbenv
         - m4 # needed for opam/core
+        - nodejs
+        - npm
         - ocaml
         - opam
         - openjdk-8-jdk
         - openssh-server # TODO setup etc config
         - postgresql
         - postgresql-server-dev-9.4
+        - pngquant
         - pv
-        # - r-base-core
+        - r-base-core
         - rlwrap
         - rust-1.0.0-beta
         - silversearcher-ag
         - sqlite3
+        - sqlite3-devel
         - texlive-fonts-recommended
         - texlive-latex-extra
         - texlive-latex-recommended
@@ -55,7 +59,6 @@
         - wamerican # /usr/share/dict/words
         - whois
         - wordnet
-        - xournal
         - xsel
         - zsh
 
@@ -77,6 +80,11 @@
         - .tmux.conf
         - .zshenv
         - .zshrc
+
+    - name: link node
+      file: path=/usr/local/bin/node src=/usr/bin/nodejs state=link
+      tags: [node]
+      sudo: True
 
     - name: switch to ZSH
       user: name={{ansible_ssh_user}} shell=/usr/bin/zsh
