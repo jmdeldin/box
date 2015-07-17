@@ -6,7 +6,7 @@ development environment. It is most certainly impractical for
 everyone, but I wanted to learn how to use Ansible for configuration
 management.
 
-It currently targets an Ubuntu 13.10 machine, specifically a System76
+It currently targets an Ubuntu 15.04 machine, specifically a System76
 Galago UltraPro laptop. If targeting other machines, remove the
 `include: system76.yml` line from `setup.yml`.
 
