@@ -18,6 +18,7 @@
     - gimp
     - gnome-tweak-tool # set Emacs keybindings + caps lock
     - hal
+    - mplayer
     - redshift
     - system76-driver
     - unity-tweak-tool # remove desktop from alt-tab
