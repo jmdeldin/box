@@ -46,10 +46,9 @@
         - pv
         - r-base-core
         - rlwrap
-        - rust-1.0.0-beta
+        - rust-stable
         - silversearcher-ag
         - sqlite3
-        - sqlite3-devel
         - texlive-fonts-recommended
         - texlive-latex-extra
         - texlive-latex-recommended
