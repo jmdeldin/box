@@ -103,11 +103,11 @@
       tags: [ruby]
 
     - name: build ruby version
-      command: rbenv install 2.2.1 creates=~/.rbenv/versions/2.2.1
+      command: rbenv install 2.2.2 creates=~/.rbenv/versions/2.2.2
       tags: [ruby]
 
     - name: set global version
-      command: rbenv global 2.2.1 creates=~/.rbenv/version
+      command: rbenv global 2.2.2 creates=~/.rbenv/version
       tags: [ruby]
 
     - name: install base gems
