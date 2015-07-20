@@ -47,6 +47,11 @@
     - pylast
     - python-mpd2
 
+- name: unregister mpd -- we run this as $user
+  service: name=mpd state=stopped enabled=no
+  sudo: True
+  tags: [system76, music]
+
 - name: remove garbage packages
   apt: pkg={{item}} state=absent purge=yes
   sudo: True
