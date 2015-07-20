@@ -61,6 +61,15 @@
         - xsel
         - zsh
 
+    - name: install deps for consulting projects
+      apt: pkg={{item}} state=installed
+      sudo: True
+      tags: [packages]
+      with_items:
+        - libqt5webkit5-dev
+        - redis-server
+        - qt5-default
+
     - name: create the src working directory
       file: path=~/src/vendor state=directory
       tags: [users]
