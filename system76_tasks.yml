@@ -24,6 +24,29 @@
     - unity-tweak-tool # remove desktop from alt-tab
     - xournal
 
+- name: music
+  apt: pkg={{item}} state=installed
+  sudo: True
+  tags: [sytem76, music]
+  with_items:
+    - gmpc # handy for quickly checking tags
+    - mpc
+    - mpd
+    - mpdcron # last.fm scrobbling
+    - ncmpcpp # viewer
+    - python-pip # for beets
+
+- name: install deps for beets
+  pip: name={{item}} state=present
+  sudo: True
+  tags: [system76, music]
+  with_items:
+    - beets
+    - flask
+    - requests
+    - pylast
+    - python-mpd2
+
 - name: remove garbage packages
   apt: pkg={{item}} state=absent purge=yes
   sudo: True
