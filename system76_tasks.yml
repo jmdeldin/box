@@ -31,6 +31,7 @@
   with_items:
     - empathy
     - thunderbird
+    - rhythmbox
     - unity-lens-shopping
 
 # SSD optimizations
