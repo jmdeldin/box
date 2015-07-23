@@ -15,6 +15,7 @@
   tags: [system76, packages]
   with_items:
     - chromium-browser
+    - gcolor2 # color picker
     - gimp
     - gnome-tweak-tool # set Emacs keybindings + caps lock
     - hal
