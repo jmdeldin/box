@@ -50,9 +50,30 @@
     - pylast
     - python-mpd2
 
+- stat: path=/lib/systemd/system/mpd.service
+  register: mpd_srv
+  tags: [system76, music]
+
 - name: unregister mpd -- we run this as $user
   service: name=mpd state=stopped enabled=no
   sudo: True
+  tags: [system76, music]
+  when: mpd_srv.stat.exists
+
+- name: remove mpd service
+  file: path=/lib/systemd/system/mpd.service state=absent
+  sudo: True
+  when: mpd_srv is defined
+  tags: [system76, music]
+
+- stat: path=/etc/init.d/mpd
+  register: mpd_srv
+  tags: [system76, music]
+
+- name: remove mpd service
+  file: path=/etc/init.d/mpd state=absent
+  sudo: True
+  when: mpd_srv is defined
   tags: [system76, music]
 
 - name: remove garbage packages
