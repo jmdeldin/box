@@ -30,6 +30,7 @@
   sudo: True
   tags: [sytem76, music]
   with_items:
+    - easytag
     - gmpc # handy for quickly checking tags
     - mpc
     - mpd
