@@ -77,7 +77,7 @@
   tags: [system76, music]
 
 - name: remove garbage packages
-  apt: pkg={{item}} state=absent purge=yes
+  apt: name={{item}} state=absent purge=yes
   sudo: True
   tags: [system76, packages]
   with_items:
