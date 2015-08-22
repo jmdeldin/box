@@ -30,8 +30,9 @@
         - htop
         - imagemagick
         - libffi-dev # rbenv
-        - libssl-dev # rbenv
         - libreadline-dev # rbenv
+        - libsqlite3-dev # sqlite/takky
+        - libssl-dev # rbenv
         - libyaml-dev # rbenv
         - m4 # needed for opam/core
         - nodejs
