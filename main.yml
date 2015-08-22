@@ -70,6 +70,7 @@
         - libqt5webkit5-dev
         - redis-server
         - qt5-default
+        - phantomjs
 
     - name: create the src working directory
       file: path=~/src/vendor state=directory
