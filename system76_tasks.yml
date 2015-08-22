@@ -23,6 +23,7 @@
     - redshift
     - system76-driver
     - unity-tweak-tool # remove desktop from alt-tab
+    - virtualbox
     - xournal
 
 - name: music
