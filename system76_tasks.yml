@@ -18,6 +18,7 @@
     - gcolor2 # color picker
     - gimp
     - gnome-tweak-tool # set Emacs keybindings + caps lock
+    - guvcview # webcam
     - hal
     - mplayer
     - redshift
@@ -81,6 +82,7 @@
   sudo: True
   tags: [system76, packages]
   with_items:
+    - cheese
     - empathy
     - thunderbird
     - rhythmbox
