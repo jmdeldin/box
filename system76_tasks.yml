@@ -82,9 +82,3 @@
 - cron: name="trim /" hour="10" job="fstrim /"
   sudo: True
   tags: [system76]
-
-- name: Disable bluetooth
-  lineinfile: dest=/etc/rc.local state=present line="rfkill block bluetooth"
-              insertbefore="exit 0"
-  sudo: True
-  tags: [system76]
