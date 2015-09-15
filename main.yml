@@ -68,9 +68,10 @@
       tags: [packages]
       with_items:
         - libqt5webkit5-dev
-        - redis-server
-        - qt5-default
         - phantomjs
+        - qt5-default
+        - redis-server
+        - s3cmd
 
     - name: create the src working directory
       file: path=~/src/vendor state=directory
