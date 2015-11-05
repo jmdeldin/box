@@ -72,6 +72,7 @@
         - qt5-default
         - redis-server
         - s3cmd
+        - wkhtmltopdf
 
     - name: create the src working directory
       file: path=~/src/vendor state=directory
