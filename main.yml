@@ -29,6 +29,7 @@
         - graphviz
         - htop
         - imagemagick
+        - iotop
         - libffi-dev # rbenv
         - libreadline-dev # rbenv
         - libsqlite3-dev # sqlite/takky
