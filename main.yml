@@ -30,10 +30,13 @@
         - cloc
         - curl
         - emacs24
+        - exiftool
         - git
         - gnuplot-x11
         - graphviz
         - htop
+        - slurm
+        - nethogs
         - imagemagick
         - iotop
         - libffi-dev # rbenv
@@ -54,7 +57,6 @@
         - pv
         - r-base-core
         - rlwrap
-        - rust-stable
         - silversearcher-ag
         - sqlite3
         - texlive-fonts-recommended
@@ -74,7 +76,9 @@
       sudo: True
       tags: [packages]
       with_items:
+        - heroku-toolbelt
         - libqt5webkit5-dev
+        - nginx
         - phantomjs
         - qt5-default
         - redis-server
@@ -159,8 +163,25 @@
       tags: [net]
       sudo: True
 
+    - name: copy nginx template for rails work
+      copy: src=templates/etc/nginx/sites-available/default dest=/etc/nginx/sites-available/default
+      tags: [rails]
+      sudo: True
+      notify: [restart nginx]
+
+    - name: increase limits for neo4j
+      copy: src=templates/etc/security/limits.conf dest=/etc/security/limits.conf
+      tags: [neo4j]
+      sudo: True
+
+    - name: enable limits
+      lineinfile: dest=/etc/pam.d/su state=present
+                  line="session required pam_limits.so"
+      tags: [neo4j]
+      sudo: True
+
     - include: system76_tasks.yml
-    - include: theclymb_tasks.yml
+    # - include: theclymb_tasks.yml
 
   handlers:
     - include: system76_handlers.yml
@@ -168,3 +189,7 @@
 
     - name: rehash ruby gems
       command: rbenv rehash
+
+    - name: restart nginx
+      service: name=nginx state=restarted
+      sudo: True
