@@ -29,7 +29,7 @@
     - gmpc # handy for quickly checking tags
     - mpc
     - mpd
-    - mpdcron # last.fm scrobbling
+    - mpdscribble # last.fm scrobbling
     - ncmpcpp # viewer
     - python-pip # for beets
 
@@ -54,6 +54,7 @@
   tags: [system76, music]
   when: mpd_srv.stat.exists
 
+  # TODO: do the same for mpdscribble and set it in autostart for X
 - name: remove mpd service
   file: path=/lib/systemd/system/mpd.service state=absent
   sudo: True
