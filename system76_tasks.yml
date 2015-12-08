@@ -77,9 +77,13 @@
   tags: [system76, packages]
   with_items:
     - cheese
+    - darktable
     - empathy
-    - thunderbird
+    - gparted
+    - gstreamer1.0-libav # video codecs
     - rhythmbox
+    - thunderbird
+    - unetbootin
     - unity-lens-shopping
 
 # SSD optimizations
