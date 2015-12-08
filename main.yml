@@ -2,7 +2,7 @@
 - hosts: devel
 
   vars:
-    ubuntu: vivid
+    ubuntu: wily
 
   tasks:
     - name: install aptitude first
