@@ -3,11 +3,6 @@
   tags: [system76]
   apt_repository: repo=ppa:system76-dev/stable
 
-- name: stupid flash workaround for DRM
-  sudo: True
-  tags: [system76]
-  apt_repository: repo=ppa:mjblenner/ppa-hal
-
 - name: install system76 drivers & other GUI software
   apt: pkg={{item}} state=installed
   sudo: True
@@ -18,7 +13,6 @@
     - gimp
     - gnome-tweak-tool # set Emacs keybindings + caps lock
     - guvcview # webcam
-    - hal
     - mplayer
     - redshift
     - system76-driver
