@@ -9,9 +9,15 @@
       apt: pkg=aptitude state=installed
       sudo: True
 
-    - apt_repository: repo=ppa:hansjorg/rust
+    - name: add repo for heroku
+      apt_repository: repo='deb http://toolbelt.heroku.com/ubuntu ./' state=present
       sudo: True
-      tags: [packages]
+      tags: [heroku]
+
+    - name: add key for heroku
+      apt_key: url=https://toolbelt.heroku.com/apt/release.key
+      tags: [heroku]
+      sudo: True
 
     - name: install userspace packages
       apt: pkg={{item}} state=installed
