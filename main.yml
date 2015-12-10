@@ -59,10 +59,10 @@
         - rlwrap
         - silversearcher-ag
         - sqlite3
-        - texlive-fonts-recommended
-        - texlive-latex-extra
-        - texlive-latex-recommended
-        - texlive-xetex
+        # - texlive-fonts-recommended
+        # - texlive-latex-extra
+        # - texlive-latex-recommended
+        # - texlive-xetex
         - tmux
         - tree
         - wamerican # /usr/share/dict/words
