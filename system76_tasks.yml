@@ -80,8 +80,8 @@
     - darktable
     - empathy
     - gparted
-    - gstreamer1.0-libav # video codecs
     - rhythmbox
     - thunderbird
+    - totem
     - unetbootin
     - unity-lens-shopping
