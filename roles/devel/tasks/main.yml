@@ -64,14 +64,14 @@
 
 - name: copy iptables
   copy: src=templates/etc/iptables.rules dest=/etc/iptables.rules
-  sudo: True
+  become: True
   tags: [net]
 
 - name: load iptables
   lineinfile: dest=/etc/network/interfaces state=present
               line="pre-up iptables-restore < /etc/iptables.rules"
   tags: [net]
-  sudo: True
+  become: True
 
 - name: disable password ssh
   lineinfile: dest=/etc/ssh/sshd_config state=present
