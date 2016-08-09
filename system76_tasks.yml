@@ -92,7 +92,7 @@
 
     - name: kill stupid update notifier
       file: path={{item}} state=absent
-      tags: [ubuntu]
+      tags: [system76]
       with_items:
         - /etc/cron.weekly/update-notifier-common
         - /etc/cron.daily/update-notifier-common
