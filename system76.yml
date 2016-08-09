@@ -25,6 +25,7 @@
         - gnome-tweak-tool # set Emacs keybindings + caps lock
         - guvcview # webcam
         - gparted
+        - ledger
         - mplayer
         - redshift
         - system76-driver
