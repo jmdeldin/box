@@ -31,11 +31,11 @@ To run an arbitrary command:
 
 To execute specific tagged tasks from the "playbook":
 
-    ansible-playbook -i hosts --tags "ruby" main.yml
+    ansible-playbook -i hosts --tags "ruby" system76.yml
 
 To run the entire playbook:
 
-    ansible-playbook -K -i hosts main.yml
+    ansible-playbook -K -i hosts system76.yml
 
 Author
 ------
