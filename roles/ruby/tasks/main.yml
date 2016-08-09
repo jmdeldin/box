@@ -1,0 +1,20 @@
+---
+- name: Install deps for gems
+  apt: pkg={{item}} state=installed
+  become: True
+  tags: [ruby]
+  with_items:
+    - libffi-dev # rbenv
+    - libreadline-dev # rbenv
+    - libsqlite3-dev # sqlite
+    - libssl-dev # rbenv
+    - libyaml-dev # rbenv
+    - sqlite3
+
+- name: setup rbenv
+  git: repo=git@github.com:sstephenson/rbenv.git dest=~/.rbenv update=False
+  tags: [ruby]
+
+- name: setup ruby-build
+  git: repo=git@github.com:sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build update=False
+  tags: [ruby]

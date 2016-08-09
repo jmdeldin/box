@@ -1,0 +1,15 @@
+- name: install deps for consulting projects
+  apt: pkg={{item}} state=installed
+  become: True
+  with_items:
+    - libcurl4-openssl-dev
+    - libqt5webkit5-dev
+    - mongodb
+    - nginx
+    - nodejs
+    - qt5-default
+    - redis-server
+
+- name: link node
+  file: path=/usr/local/bin/node src=/usr/bin/nodejs state=link
+  become: True

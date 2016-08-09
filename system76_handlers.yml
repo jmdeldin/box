@@ -1,3 +1,0 @@
-- name: rebuild boot image
-  command: update-initramfs -u
-  sudo: True

@@ -1,6 +1,11 @@
 # Setup for my System76 laptop.
 ---
 - hosts: localhost
+  roles:
+    - copious
+    - devel
+    - ruby
+    - nginx_proxy
 
   tasks:
     - name: add System76 repo

@@ -1,0 +1,91 @@
+---
+- name: install essential dev tools
+  apt: pkg={{item}} state=installed
+  become: True
+  tags: [emacs, essentials]
+  with_items:
+    - emacs24
+    - git
+    - gnupg2
+    - gnupg-agent
+    - openssh-server
+    - zsh
+
+- name: install convenient shell tools
+  apt: pkg={{item}} state=installed
+  become: True
+  tags: [convenience]
+  with_items:
+    - aspell-en # writing
+    - build-essential
+    - cloc
+    - curl
+    - exiftool
+    - htop
+    - imagemagick
+    - iotop
+    - parallel
+    - pv
+    - silversearcher-ag
+    - slurm
+    - tmux
+    - tree
+    - wamerican # /usr/share/dict/words
+    - whois
+    - wordnet # writing
+    - xsel
+
+- name: create the src working directory
+  file: path=~/src/vendor state=directory
+  tags: [essentials]
+
+- name: clone dotfiles
+  git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc update=False
+  tags: [essentials]
+
+- name: link dotfiles
+  file: path=~/{{item}} src=~/src/etc/{{item}} state=link
+  tags: [essentials]
+  with_items:
+    - .gitconfig
+    - .gitignore
+    - .tmux.conf
+    - .zshenv
+    - .zshrc
+
+- name: switch to ZSH
+  user: name={{ansible_user}} shell=/usr/bin/zsh
+  become: true
+  tags: [essentials]
+
+- name: clone .emacs.d
+  git: repo=git@github.com:jmdeldin/.emacs.d.git dest=~/.emacs.d update=False
+  tags: [essentials]
+
+- name: copy iptables
+  copy: src=templates/etc/iptables.rules dest=/etc/iptables.rules
+  sudo: True
+  tags: [net]
+
+- name: load iptables
+  lineinfile: dest=/etc/network/interfaces state=present
+              line="pre-up iptables-restore < /etc/iptables.rules"
+  tags: [net]
+  sudo: True
+
+- name: disable password ssh
+  lineinfile: dest=/etc/ssh/sshd_config state=present
+              line="PasswordAuthentication no"
+  tags: [net]
+  become: True
+
+- name: increase limits for neo4j
+  copy: src=templates/etc/security/limits.conf dest=/etc/security/limits.conf
+  tags: [neo4j]
+  become: True
+
+- name: enable limits
+  lineinfile: dest=/etc/pam.d/su state=present
+              line="session required pam_limits.so"
+  tags: [neo4j]
+  become: True
