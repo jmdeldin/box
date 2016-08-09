@@ -24,6 +24,7 @@
         - gimp
         - gnome-tweak-tool # set Emacs keybindings + caps lock
         - guvcview # webcam
+        - gparted
         - mplayer
         - redshift
         - system76-driver
@@ -78,18 +79,14 @@
         - cheese
         - deja-dup
         - empathy
-        - gparted
         - gnome-mahjongg
         - gnome-mines
         - rhythmbox
         - shotwell
         - thunderbird
         - totem
-        - unetbootin
         - unity-lens-shopping
         - unity-webapps
-        - vlc
-        - webbrowser-app
 
     - cron: name="cleanup old kernels" special_time="weekly" job="apt-get autoremove -y && update-grub"
       become: True
