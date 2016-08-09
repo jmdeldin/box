@@ -1,87 +1,98 @@
-- name: add System76 repo
-  sudo: True
-  tags: [system76]
-  apt_repository: repo=ppa:system76-dev/stable
+# Setup for my System76 laptop.
+---
+- hosts: localhost
 
-- name: install system76 drivers & other GUI software
-  apt: pkg={{item}} state=installed
-  sudo: True
-  tags: [system76, packages]
-  with_items:
-    - chromium-browser
-    - gcolor2 # color picker
-    - gimp
-    - gnome-tweak-tool # set Emacs keybindings + caps lock
-    - guvcview # webcam
-    - mplayer
-    - redshift
-    - system76-driver
-    - unity-tweak-tool # remove desktop from alt-tab
-    - virtualbox
-    - xournal
+  tasks:
+    - name: add System76 repo
+      tags: [system76]
+      apt_repository: repo=ppa:system76-dev/stable
+      become: True
 
-- name: music
-  apt: pkg={{item}} state=installed
-  sudo: True
-  tags: [sytem76, music]
-  with_items:
-    - easytag
-    - gmpc # handy for quickly checking tags
-    - mpc
-    - mpd
-    - mpdscribble # last.fm scrobbling
-    - ncmpcpp # viewer
-    - python-pip # for beets
+    - name: install system76 drivers & other GUI software
+      apt: pkg={{item}} state=installed
+      become: True
+      tags: [system76, packages]
+      with_items:
+        - chromium-browser
+        - darktable
+        - gcolor2 # color picker
+        - gimp
+        - gnome-tweak-tool # set Emacs keybindings + caps lock
+        - guvcview # webcam
+        - mplayer
+        - redshift
+        - system76-driver
+        - unity-tweak-tool # remove desktop from alt-tab
+        - virtualbox
+        - xournal
 
-- name: install deps for beets
-  pip: name={{item}} state=present
-  sudo: True
-  tags: [system76, music]
-  with_items:
-    - beets
-    - flask
-    - requests
-    - pylast
-    - python-mpd2
+    - name: music
+      apt: pkg={{item}} state=installed
+      become: True
+      tags: [sytem76, music]
+      with_items:
+        - beets
+        - easytag # GUI for editing tags
+        - gmpc # handy for quickly checking tags
+        - mpc
+        - mpd
+        - ncmpcpp # viewer
+        - python-pip # for beets
 
-- stat: path=/lib/systemd/system/mpd.service
-  register: mpd_srv
-  tags: [system76, music]
+    - stat: path=/lib/systemd/system/mpd.service
+      register: mpd_srv
+      tags: [system76, music]
 
-- name: unregister mpd -- we run this as $user
-  service: name=mpd state=stopped enabled=no
-  sudo: True
-  tags: [system76, music]
-  when: mpd_srv.stat.exists
+    - name: unregister mpd -- we run this as $user
+      service: name=mpd state=stopped enabled=no
+      become: True
+      tags: [system76, music]
+      when: mpd_srv.stat.exists
 
-  # TODO: do the same for mpdscribble and set it in autostart for X
-- name: remove mpd service
-  file: path=/lib/systemd/system/mpd.service state=absent
-  sudo: True
-  when: mpd_srv is defined
-  tags: [system76, music]
+    - name: remove mpd service
+      file: path=/lib/systemd/system/mpd.service state=absent
+      become: True
+      when: mpd_srv is defined
+      tags: [system76, music]
 
-- stat: path=/etc/init.d/mpd
-  register: mpd_srv
-  tags: [system76, music]
+    - stat: path=/etc/init.d/mpd
+      register: mpd_srv
+      tags: [system76, music]
 
-- name: remove mpd service
-  file: path=/etc/init.d/mpd state=absent
-  sudo: True
-  when: mpd_srv is defined
-  tags: [system76, music]
+    - name: remove mpd service
+      file: path=/etc/init.d/mpd state=absent
+      become: True
+      when: mpd_srv is defined
+      tags: [system76, music]
 
-- name: remove garbage packages
-  apt: name={{item}} state=absent purge=yes
-  sudo: True
-  tags: [system76, packages]
-  with_items:
-    - cheese
-    - darktable
-    - empathy
-    - gparted
-    - rhythmbox
-    - thunderbird
-    - totem
-    - unetbootin
-    - unity-lens-shopping
+    - name: remove garbage packages
+      apt: name={{item}} state=absent purge=yes
+      become: True
+      tags: [system76, packages]
+      with_items:
+        - cheese
+        - deja-dup
+        - empathy
+        - gparted
+        - gnome-mahjongg
+        - gnome-mines
+        - rhythmbox
+        - shotwell
+        - thunderbird
+        - totem
+        - unetbootin
+        - unity-lens-shopping
+        - unity-webapps
+        - vlc
+        - webbrowser-app
+
+    - cron: name="cleanup old kernels" special_time="weekly" job="apt-get autoremove -y && update-grub"
+      become: True
+      tags: [system76]
+
+    - name: kill stupid update notifier
+      file: path={{item}} state=absent
+      tags: [ubuntu]
+      with_items:
+        - /etc/cron.weekly/update-notifier-common
+        - /etc/cron.daily/update-notifier-common
