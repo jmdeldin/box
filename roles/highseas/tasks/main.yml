@@ -1,0 +1,10 @@
+- name: install system deps
+  apt: pkg={{item}} state=installed
+  become: True
+  with_items:
+    - elasticsearch
+
+- name: ensure ES starts as a daemon
+  lineinfile: dest=/etc/default/elasticsearch state=present line="START_DAEMON=true"
+  become: True
+  notify: [restart ES]

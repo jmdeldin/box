@@ -4,6 +4,7 @@
   roles:
     - copious
     - devel
+    - highseas
     - ruby
     - nginx_proxy
 
