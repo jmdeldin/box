@@ -36,7 +36,7 @@
     - name: music
       apt: pkg={{item}} state=installed
       become: True
-      tags: [sytem76, music]
+      tags: [system76, music]
       with_items:
         - beets
         - easytag # GUI for editing tags
@@ -71,6 +71,13 @@
       become: True
       when: mpd_srv is defined
       tags: [system76, music]
+
+    - name: email
+      apt: pkg={{item}} state=installed
+      become: True
+      tags: [system76, email]
+      with_items:
+        - getmail4
 
     - name: remove garbage packages
       apt: name={{item}} state=absent purge=yes
