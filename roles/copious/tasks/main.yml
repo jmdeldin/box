@@ -1,10 +1,28 @@
+- name: "fetch mongo's key"
+  apt_key: keyserver=keyserver.ubuntu.com id=EA312927
+  become: True
+  tags: [mongo]
+
+- name: add repo for Mongo
+  apt_repository: repo='{{item}} http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse xenial main'
+  become: True
+  tags: [mongo]
+  with_items:
+    - deb
+    - deb-src
+
+- name: create systemd service
+  copy: src=templates/lib/systemd/system/mongod.service dest=/lib/systemd/system/mongod.service
+  become: True
+  tags: [mongo]
+
 - name: install deps for consulting projects
   apt: pkg={{item}} state=installed
   become: True
   with_items:
     - libcurl4-openssl-dev
     - libqt5webkit5-dev
-    - mongodb
+    - mongodb-org
     - nginx
     - nodejs
     - qt5-default

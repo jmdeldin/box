@@ -6,15 +6,8 @@ development environment. It is most certainly impractical for
 everyone, but I wanted to learn how to use Ansible for configuration
 management.
 
-It currently targets an Ubuntu 15.04 machine, specifically a System76
-Galago UltraPro laptop. If targeting other machines, remove the
-`include: system76.yml` line from `setup.yml`.
-
-Included Packages
------------------
-
-This environment is geared towards Ruby, R, and LaTeX, but for the full
-list of packages, take a look at `ansible/setup.yml`.
+It currently targets an Ubuntu 16.04 machine, specifically a System76
+Galago UltraPro laptop.
 
 Prerequisites
 -------------
