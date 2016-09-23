@@ -4,6 +4,7 @@
   with_items:
     - elasticsearch
     - openvpn
+    - mariadb-server
 
 - name: ensure ES starts as a daemon
   lineinfile: dest=/etc/default/elasticsearch state=present line="START_DAEMON=true"
