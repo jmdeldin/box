@@ -110,5 +110,8 @@
         - /etc/cron.daily/update-notifier-common
 
     - name: Fix default browser
-      shell: update-alternatives --set x-www-browser /usr/bin/chromium-browser
+      shell: update-alternatives --set {{item}} /usr/bin/chromium-browser
+      with_items:
+        - gnome-www-browser
+        - x-www-browser
       become: True
