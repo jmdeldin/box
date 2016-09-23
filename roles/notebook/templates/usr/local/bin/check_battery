@@ -16,8 +16,10 @@ if [ -z "$limit" ]; then
 fi
 
 battery=$(acpi -b)
-remaining=$(echo $battery | grep Discharging | egrep -o "[0-9]+%" )
-
-if [ -n $remaining -a $(echo $remaining | tr -d '%') -lt $limit ]; then
-    notify-send "LOW BATTERY: $remaining remaining"
+if echo $battery | grep -q Discharging; then
+    remaining=$(echo $battery | grep Discharging | egrep -o "[0-9]+%" )
+    rem=$(echo $remaining | tr -d '%')
+    if [ $rem -lt $limit ]; then
+        notify-send "LOW BATTERY: $remaining remaining"
+     fi
 fi
