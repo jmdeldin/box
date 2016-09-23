@@ -1,0 +1,23 @@
+#! /bin/sh
+#
+# Check battery level and notify if necessary. Useful for running in minimal
+# environments, i.e., without a desktop manager.
+#
+# Requires `acpi' to be installed.
+#
+# Usage: check_battery WARNING_LIMIT
+#
+# Author: Jon-Michael Deldin <dev@jmdeldin.com>
+# Date: 2016-09-23
+
+limit=$1
+if [ -z "$limit" ]; then
+    limit=10
+fi
+
+battery=$(acpi -b)
+remaining=$(echo $battery | grep Discharging | egrep -o "[0-9]+%" )
+
+if [ -n $remaining -a $(echo $remaining | tr -d '%') -lt $limit ]; then
+    notify-send "LOW BATTERY: $remaining remaining"
+fi

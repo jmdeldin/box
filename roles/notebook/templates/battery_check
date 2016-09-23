@@ -1,0 +1,8 @@
+#! /bin/sh
+
+battery=$(acpi -b)
+remaining=$(echo $battery | grep Discharging | egrep -o "[0-9]+%" )
+
+if [ -n $remaining -a $(echo $remaining | tr -d '%') -lt 10 ]; then
+    notify-send "LOW BATTERY: $remaining remaining"
+fi

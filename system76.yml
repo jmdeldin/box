@@ -7,6 +7,7 @@
     - highseas
     - ruby
     - nginx_proxy
+    - notebook
 
   tasks:
     - name: add System76 repo
