@@ -40,13 +40,17 @@
       become: True
       tags: [system76, music]
       with_items:
-        - beets
         - easytag # GUI for editing tags
         - gmpc # handy for quickly checking tags
         - mpc
         - mpd
         - ncmpcpp # viewer
         - python-pip # for beets
+
+    - name: install beets
+      pip: name=beets state=present
+      become: True
+      tags: [music]
 
     - stat: path=/lib/systemd/system/mpd.service
       register: mpd_srv
