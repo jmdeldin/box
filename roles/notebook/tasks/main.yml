@@ -1,5 +1,3 @@
 - name: copy battery script
   copy: src=templates/usr/local/bin/check_battery dest=/usr/local/bin/check_battery mode="775"
   become: True
-
-- cron: name="check battery" job="/usr/local/bin/check_battery 30" minute="*/5"
