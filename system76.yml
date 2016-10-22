@@ -102,7 +102,7 @@
         - unity-lens-shopping
         - unity-webapps
 
-    - cron: name="cleanup old kernels" special_time="weekly" job="apt-get autoremove -y && update-grub"
+    - cron: name="cleanup old kernels" special_time="weekly" job="apt autoremove -y && update-grub"
       become: True
       tags: [system76]
 

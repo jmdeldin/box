@@ -52,6 +52,10 @@
     - .tmux.conf
     - .zshenv
     - .zshrc
+    - .ledgerrc
+    - .Xresources
+    - .Xmodmap
+    - .xprofile
 
 - name: switch to ZSH
   user: name={{ansible_user}} shell=/usr/bin/zsh
