@@ -43,6 +43,10 @@
   git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc update=False
   tags: [essentials]
 
+- name: create XDG_CONFIG_HOME
+  file: path=~/.config state=directory
+  tags: [essentials]
+
 - name: link dotfiles
   file: path=~/{{item}} src=~/src/etc/{{item}} state=link
   tags: [essentials]
@@ -56,6 +60,9 @@
     - .Xresources
     - .Xmodmap
     - .xprofile
+    - .config/i3
+    - .config/i3status
+    - .config/mpd
 
 - name: switch to ZSH
   user: name={{ansible_user}} shell=/usr/bin/zsh
