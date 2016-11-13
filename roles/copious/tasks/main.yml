@@ -12,7 +12,7 @@
     - deb-src
 
 - name: create systemd service
-  copy: src=templates/lib/systemd/system/mongod.service dest=/lib/systemd/system/mongod.service
+  copy: src=../templates/lib/systemd/system/mongod.service dest=/lib/systemd/system/mongod.service
   become: True
   tags: [mongo]
 

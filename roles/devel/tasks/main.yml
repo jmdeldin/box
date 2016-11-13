@@ -74,7 +74,7 @@
   tags: [essentials]
 
 - name: copy iptables
-  copy: src=templates/etc/iptables.rules dest=/etc/iptables.rules
+  copy: src=../templates/etc/iptables.rules dest=/etc/iptables.rules
   become: True
   tags: [net]
 
@@ -91,7 +91,7 @@
   become: True
 
 - name: increase limits for neo4j
-  copy: src=templates/etc/security/limits.conf dest=/etc/security/limits.conf
+  copy: src=../templates/etc/security/limits.conf dest=/etc/security/limits.conf
   tags: [neo4j]
   become: True
 

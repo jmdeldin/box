@@ -5,7 +5,7 @@
   tags: [nginx]
 
 - name: copy nginx template for rails work
-  copy: src=templates/etc/nginx/sites-available/default dest=/etc/nginx/sites-available/default
+  copy: src=../templates/etc/nginx/sites-available/default dest=/etc/nginx/sites-available/default
   tags: [nginx]
   become: True
   notify: [restart nginx]
