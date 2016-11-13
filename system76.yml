@@ -16,11 +16,17 @@
       apt_repository: repo=ppa:system76-dev/stable
       become: True
 
+    - name: add repo for latest 0ad
+      apt_repository: repo=ppa:wfg/0ad
+      become: True
+      tags: [games]
+
     - name: install system76 drivers & other GUI software
       apt: pkg={{item}} state=installed
       become: True
       tags: [system76, packages]
       with_items:
+        - 0ad
         - chromium-browser
         - darktable
         - gcolor2 # color picker
