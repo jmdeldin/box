@@ -63,6 +63,7 @@
     - .config/i3
     - .config/i3status
     - .config/mpd
+    - .config/beets
 
 - name: switch to ZSH
   user: name={{ansible_user}} shell=/usr/bin/zsh
