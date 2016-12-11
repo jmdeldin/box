@@ -1,0 +1,27 @@
+#! /usr/bin/env perl
+#
+# Turn a magnet URI into a .torrent file for rtorrent.
+#
+# Perl version of https://wiki.archlinux.org/index.php/RTorrent
+#
+# Author :: Jon-Michael Deldin <dev@jmdeldin.com>
+# Date   :: 2016-12-10
+#
+
+use warnings;
+use strict;
+
+use Cwd qw();
+use File::Temp qw(tempfile);
+
+my ($uri) = @ARGV or die "USAGE: $0 MAGNET_URI";
+my $len = length($uri);
+my $body = "d10:magnet-uri${len}:${uri}e";
+my ($fh, $filename) = tempfile("magnet-XXXX",
+                               SUFFIX => ".torrent",
+                               DIR => Cwd::cwd(),
+                               UNLINK => 0);
+
+print $fh $body;
+print STDERR "Saved link to ${filename}\n";
+close $fh;

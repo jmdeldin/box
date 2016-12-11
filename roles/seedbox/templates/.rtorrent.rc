@@ -1,0 +1,29 @@
+min_peers = 1
+max_peers = 100
+
+min_peers_seed = 1
+max_peers_seed = 20
+
+max_uploads = 10
+
+download_rate = 0
+upload_rate = 150
+
+check_hash = yes
+
+ratio.enable =
+ratio.min.set=1
+ratio.max.set = 1
+system.method.set = group.seeding.ratio.command, d.close
+
+port_range = 33101-33199
+port_random = yes
+
+directory = ~/completed
+session = ~/progress
+schedule = watch_directory,5,5,"load_start=~/watch/*.torrent"
+
+encryption = require,require_RC4,allow_incoming,try_outgoing
+#encryption = allow_incoming,try_outgoing,enable_retry,prefer_plaintext
+
+peer_exchange = yes

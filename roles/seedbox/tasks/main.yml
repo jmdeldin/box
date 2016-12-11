@@ -1,0 +1,35 @@
+---
+- name: install packages
+  become: True
+  apt: pkg={{item}} state=installed
+  with_items:
+    - rtorrent
+
+- name: create rtorrent default directories
+  become: True
+  file:
+    path: /home/{{seedbox_user}}/{{item}}
+    state: directory
+    owner: "{{seedbox_user}}"
+    group: "{{seedbox_user}}"
+  with_items:
+    - watch
+    - progress
+    - completed
+
+- name: copy demagnetize over
+  become: True
+  copy:
+    src: ../templates/bin/demagnetize
+    dest: /home/{{seedbox_user}}/demagnetize
+    mode: 0755
+    owner: "{{seedbox_user}}"
+    group: "{{seedbox_user}}"
+
+- name: copy rtorrentrc file over
+  become: True
+  copy:
+    src: ../templates/.rtorrent.rc
+    dest: /home/{{seedbox_user}}/.rtorrent.rc
+    owner: "{{seedbox_user}}"
+    group: "{{seedbox_user}}"

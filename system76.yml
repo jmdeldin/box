@@ -2,6 +2,7 @@
 ---
 - hosts: localhost
   roles:
+    - base
     - janitor
     - copious
     - devel
@@ -91,23 +92,6 @@
       tags: [system76, email]
       with_items:
         - getmail4
-
-    - name: remove garbage packages
-      apt: name={{item}} state=absent purge=yes
-      become: True
-      tags: [system76, packages]
-      with_items:
-        - cheese
-        - deja-dup
-        - empathy
-        - gnome-mahjongg
-        - gnome-mines
-        - rhythmbox
-        - shotwell
-        - thunderbird
-        - totem
-        - unity-lens-shopping
-        - unity-webapps
 
     - cron: name="cleanup old kernels" special_time="weekly" job="apt autoremove -y && update-grub"
       become: True

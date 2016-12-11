@@ -1,0 +1,23 @@
+---
+- name: Prefer IPv4 instead of IPv6 (fixes hanging while connecting to ubuntu servers)
+  copy: src=../templates/etc/apt/apt.conf.d/99force-ipv4
+        dest=/etc/apt/apt.conf.d/99force-ipv4
+  become: True
+  tags: [net, packages]
+
+- name: remove garbage packages
+  apt: name={{item}} state=absent purge=yes
+  become: True
+  tags: [packages]
+  with_items:
+    - cheese
+    - deja-dup
+    - empathy
+    - gnome-mahjongg
+    - gnome-mines
+    - rhythmbox
+    - shotwell
+    - thunderbird
+    - totem
+    - unity-lens-shopping
+    - unity-webapps
