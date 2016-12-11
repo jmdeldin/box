@@ -5,6 +5,22 @@
   with_items:
     - rtorrent
 
+- name: create chromebook user
+  become: True
+  user:
+    name: "{{seedbox_user}}"
+    password: "{{ 'vcr' | password_hash('sha512') }}"
+    shell: /bin/bash
+
+- name: clean seedbox directory
+  become: True
+  file: path=/home/{{seedbox_user}}/{{item}} state=absent
+  with_items:
+    - examples.desktop
+    - .bashrc
+    - .bash_logout
+    - .profile
+
 - name: create rtorrent default directories
   become: True
   file:
