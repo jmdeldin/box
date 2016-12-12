@@ -12,6 +12,13 @@
     password: "{{ 'vcr' | password_hash('sha512') }}"
     shell: /bin/bash
 
+- name: set permissions of $HOME
+  become: True
+  file:
+    path: /home/{{seedbox_user}}
+    group: "{{seedbox_user}}"
+    owner: "{{seedbox_user}}"
+
 - name: clean seedbox directory
   become: True
   file: path=/home/{{seedbox_user}}/{{item}} state=absent
