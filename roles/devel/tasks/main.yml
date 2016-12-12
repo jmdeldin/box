@@ -21,7 +21,6 @@
     - cloc
     - curl
     - exiftool
-    - htop
     - imagemagick
     - iotop
     - parallel

@@ -21,3 +21,9 @@
     - totem
     - unity-lens-shopping
     - unity-webapps
+
+- name: install basic system packages
+  become: True
+  apt: name={{item}} state=installed
+  with_items:
+    - htop
