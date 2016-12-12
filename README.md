@@ -6,8 +6,11 @@ development environment. It is most certainly impractical for
 everyone, but I wanted to learn how to use Ansible for configuration
 management.
 
-It currently targets an Ubuntu 16.04 machine, specifically a System76
-Galago UltraPro laptop.
+Targets
+-------
+
+1. Development laptop (System76 Galago UltraPro) running Ubuntu 16.04
+2. Home backup server "VCR" (named for its form factor)
 
 Prerequisites
 -------------
