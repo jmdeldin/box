@@ -2,6 +2,7 @@
 - hosts: vcr
   roles:
     - base
+    - backup_server
     - seedbox
   vars:
     seedbox_user: netbook
@@ -11,31 +12,5 @@
       become: True
       apt: pkg={{item}} state=installed
       with_items:
-        - cryptsetup
         - libav-tools
-        - lvm2
         - tmux
-
-    - name: Download borg
-      become: True
-      get_url:
-        dest: /usr/local/bin/borg
-        url: https://github.com/borgbackup/borg/releases/download/1.0.8/borg-linux64
-      tags: [backup]
-
-    - name: Set borg permissions
-      become: True
-      tags: [backup]
-      file:
-        path: /usr/local/bin/borg
-        mode: 0755
-
-    - name: make backup mount points
-      become: True
-      tags: backup
-      file:
-        path: /media/bak_{{item}}
-        state: directory
-      with_items:
-        - primary
-        - secondary

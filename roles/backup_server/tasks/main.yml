@@ -1,0 +1,45 @@
+---
+- name: Install backup packages
+  become: True
+  apt: pkg={{item}} state=installed
+  with_items:
+    - cryptsetup
+    - lvm2
+
+- name: Download borg
+  become: True
+  get_url:
+    dest: /usr/local/bin/borg
+    url: https://github.com/borgbackup/borg/releases/download/1.0.8/borg-linux64
+  tags: [backup]
+
+- name: Set borg permissions
+  become: True
+  tags: [backup]
+  file:
+    path: /usr/local/bin/borg
+    mode: 0755
+
+# lsblk -f /dev/sdc
+- name: make backup mount points
+  become: True
+  tags: backup
+  file:
+    path: /media/{{item}}
+    state: directory
+  with_items:
+    - bak_primary
+    - bak_secondary
+
+- name: Copy mount_enc script over
+  become: True
+  copy:
+    src: ../templates/bin/{{item}}
+    dest: /usr/local/bin/{{item}}
+    mode: 0755
+    owner: root
+    group: root
+  with_items:
+    - mount_enc
+    - mount_backups
+    - unmount_backups

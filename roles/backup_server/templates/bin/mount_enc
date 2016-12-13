@@ -1,0 +1,23 @@
+#! /bin/sh
+#
+# Decrypt and mount an encrypted drive to /media.
+#
+# Author :: Jon-Michael Deldin <dev@jmdeldin.com>
+# Date   :: 2016-12-09
+#
+
+log () {
+    echo "$1" 1>&2
+}
+
+abort () {
+    log "$1"
+    exit 1
+}
+
+[ "$(id -u)" != "0" ] && abort "$(basename $0) must be run as root"
+[ -z "$1" -o -z "$2" ] && abort "Usage: $(basename $0) DEVICE MOUNT_NAME"
+
+cryptsetup luksOpen "$1" "$2"
+mount "/dev/mapper/$2" "/media/$2"
+log "Mounted $1 to /media/$2"

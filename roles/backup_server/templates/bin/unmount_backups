@@ -1,0 +1,10 @@
+#! /bin/sh
+#
+# Unmount all backup drives
+#
+# Author :: Jon-Michael Deldin <dev@jmdeldin.com>
+# Date   :: 2016-12-09
+#
+
+umount /media/bak_primary
+umount /media/bak_secondary
