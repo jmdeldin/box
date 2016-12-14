@@ -13,6 +13,9 @@
     - cheese
     - deja-dup
     - empathy
+    - exim4
+    - exim4-base
+    - exim4-config
     - gnome-mahjongg
     - gnome-mines
     - rhythmbox
