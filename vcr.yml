@@ -12,5 +12,13 @@
       become: True
       apt: pkg={{item}} state=installed
       with_items:
+        - firmware-realtek
         - libav-tools
         - tmux
+
+    - name: add non-free repo for firmware
+      become: True
+      lineinfile:
+        dest: /etc/apt/sources.list
+        state: present
+        line: "deb http://mirrors.cat.pdx.edu/debian/ jessie main non-free"
