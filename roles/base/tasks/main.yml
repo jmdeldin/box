@@ -30,3 +30,4 @@
   apt: name={{item}} state=installed
   with_items:
     - htop
+    - rsync
