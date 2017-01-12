@@ -4,6 +4,7 @@
   become: True
   tags: [ruby]
   with_items:
+    - build-essential
     - libffi-dev # rbenv
     - libreadline-dev # rbenv
     - libsqlite3-dev # sqlite
@@ -12,9 +13,16 @@
     - sqlite3
 
 - name: setup rbenv
-  git: repo=git@github.com:sstephenson/rbenv.git dest=~/.rbenv update=False
+  git:
+    repo: https://github.com/sstephenson/rbenv.git
+    dest: ~/.rbenv
+    update: False
+    accept_hostkey: True
   tags: [ruby]
 
 - name: setup ruby-build
-  git: repo=git@github.com:sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build update=False
+  git:
+    repo: https://github.com/sstephenson/ruby-build.git
+    dest: ~/.rbenv/plugins/ruby-build
+    update: False
   tags: [ruby]
