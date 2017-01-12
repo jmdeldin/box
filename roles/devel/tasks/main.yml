@@ -108,3 +108,12 @@
   file: src=~/src/bin dest=~/bin state=link
   when: no_private_linking_by_default is not defined
   tags: private
+
+- name: download vagrant
+  get_url:
+    dest: ~/src/vendor/vagrant_1.9.1.deb
+    url: https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb
+
+- name: install vagrant
+  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_1.9.1.deb
+  become: True
