@@ -1,0 +1,46 @@
+---
+- hosts: all
+  vars:
+    jruby: jruby-1.7.26
+  roles:
+    - base
+    - firewall
+    - ruby
+    - highseas
+
+  tasks:
+    - name: add rbenv to PATH
+      lineinfile:
+        dest: ~/.bashrc
+        state: present
+        line: 'export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"'
+
+    - name: install jRuby
+      shell: ~/.rbenv/bin/rbenv install {{jruby}}
+      args:
+        creates: ~/.rbenv/shims/jruby
+
+    - name: set default Ruby
+      shell: ~/.rbenv/bin/rbenv global {{jruby}}
+      args:
+        creates: ~/.rbenv/version
+
+    - name: source app_env
+      lineinfile:
+        dest: ~/.bashrc
+        state: present
+        line: "source /src/app_env.sh"
+
+    - name: install bundler
+      shell: ~/.rbenv/shims/gem install bundler
+      args:
+        creates: ~/.rbenv/shims/bundler
+
+    - name: copy SSH keys over for GitLab access
+      copy:
+        src: ~/{{item}}
+        dest: /home/{{ansible_ssh_user}}/{{item}}
+        mode: 0600
+      with_items:
+        - .ssh/id_rsa
+        - .ssh/id_rsa.pub
