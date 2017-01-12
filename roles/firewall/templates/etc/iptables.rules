@@ -14,8 +14,8 @@
 # don't break apps that communicate with loopback address
 # -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -i lo -j ACCEPT
 
-# allow 3000
--A INPUT -p tcp --dport 3000 -j ACCEPT
+# allow 3000-4000
+-A INPUT -p tcp --match multiport --dport 3000:4000 -j ACCEPT
 
 # allow 22
 -A INPUT -p tcp --dport 22 -j ACCEPT
