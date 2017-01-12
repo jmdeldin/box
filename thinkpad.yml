@@ -33,7 +33,6 @@
         - mplayer
         - redshift
         - unity-tweak-tool # TODO REMOVE
-        - virtualbox
         - xournal
 
     - name: kill stupid update notifier

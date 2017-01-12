@@ -9,6 +9,7 @@
     - gnupg2
     - gnupg-agent
     - openssh-server
+    - virtualbox
     - zsh
 
 - name: install convenient shell tools
