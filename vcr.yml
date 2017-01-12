@@ -3,6 +3,7 @@
   roles:
     - base
     - backup_server
+    - firewall
     - seedbox
   vars:
     seedbox_user: netbook

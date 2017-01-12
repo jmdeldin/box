@@ -1,0 +1,11 @@
+---
+- name: copy iptables
+  copy: src=../templates/etc/iptables.rules dest=/etc/iptables.rules
+  become: True
+  tags: [net]
+
+- name: load iptables
+  lineinfile: dest=/etc/network/interfaces state=present
+              line="pre-up iptables-restore < /etc/iptables.rules"
+  tags: [net]
+  become: True

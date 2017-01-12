@@ -73,17 +73,6 @@
   git: repo=git@github.com:jmdeldin/.emacs.d.git dest=~/.emacs.d update=False
   tags: [essentials]
 
-- name: copy iptables
-  copy: src=../templates/etc/iptables.rules dest=/etc/iptables.rules
-  become: True
-  tags: [net]
-
-- name: load iptables
-  lineinfile: dest=/etc/network/interfaces state=present
-              line="pre-up iptables-restore < /etc/iptables.rules"
-  tags: [net]
-  become: True
-
 - name: disable password ssh
   lineinfile: dest=/etc/ssh/sshd_config state=present
               line="PasswordAuthentication no"

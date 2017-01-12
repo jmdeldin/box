@@ -8,6 +8,7 @@
     - base
     - janitor
     - devel
+    - firewall
 
   tasks:
     - name: add repo for latest 0ad
@@ -15,7 +16,7 @@
       become: True
       tags: [games]
 
-    - name: install system76 drivers & other GUI software
+    - name: install misc software
       apt: pkg={{item}} state=installed
       become: True
       tags: [system76, packages]
