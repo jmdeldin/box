@@ -1,0 +1,54 @@
+# Setup for my Thinkpad T460p.
+#
+# Ensure you do this for VirtualBox: BIOS -> Security > Virtualization >
+# Enable Intel stuff.
+---
+- hosts: localhost
+  roles:
+    - base
+    - janitor
+    - devel
+
+  tasks:
+    - name: add repo for latest 0ad
+      apt_repository: repo=ppa:wfg/0ad
+      become: True
+      tags: [games]
+
+    - name: install system76 drivers & other GUI software
+      apt: pkg={{item}} state=installed
+      become: True
+      tags: [system76, packages]
+      with_items:
+        - 0ad
+        - chromium-browser
+        - darktable
+        - gcolor2 # color picker
+        - gimp
+        - gnome-tweak-tool # TODO REMOVE
+        - guvcview # webcam
+        - gparted
+        - ledger
+        - mplayer
+        - redshift
+        - unity-tweak-tool # TODO REMOVE
+        - virtualbox
+        - xournal
+
+    - name: kill stupid update notifier
+      file: path={{item}} state=absent
+      become: True
+      tags: [system76]
+      with_items:
+        - /etc/cron.weekly/update-notifier-common
+        - /etc/cron.daily/update-notifier-common
+
+    - name: install i3 stuff
+      apt: pkg={{item}} state=installed
+      become: True
+      with_items:
+        - compton
+        - i3
+        - pavucontrol
+        - rxvt-unicode
+        - xbacklight
