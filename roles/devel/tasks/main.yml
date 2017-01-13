@@ -28,6 +28,7 @@
     - pv
     - silversearcher-ag
     - slurm
+    - stow
     - tmux
     - tree
     - wamerican # /usr/share/dict/words
