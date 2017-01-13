@@ -31,6 +31,12 @@
         state: present
         line: "source /src/app_env.sh"
 
+    - name: hacky ssh-agent
+      lineinfile:
+        dest: ~/.bashrc
+        state: present
+        line: '[ -z $SSH_AGENT_PID ] && eval `ssh-agent -s` && ssh-add'
+
     - name: install bundler
       shell: ~/.rbenv/shims/gem install bundler
       args:
