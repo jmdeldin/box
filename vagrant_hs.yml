@@ -37,6 +37,12 @@
         state: present
         line: '[ -z $SSH_AGENT_PID ] && eval `ssh-agent -s` && ssh-add'
 
+    - name: bundle alias
+      lineinfile:
+        dest: ~/.bashrc
+        state: present
+        line: "alias be='bundle exec'"
+
     - name: install bundler
       shell: ~/.rbenv/shims/gem install bundler
       args:
