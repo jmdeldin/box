@@ -22,6 +22,7 @@
       tags: [system76, packages]
       with_items:
         - 0ad
+        - borgbackup
         - chromium-browser
         - darktable
         - gcolor2 # color picker
