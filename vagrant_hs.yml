@@ -4,7 +4,6 @@
     jruby: jruby-1.7.26
   roles:
     - base
-    - firewall
     - ruby
     - highseas
 
