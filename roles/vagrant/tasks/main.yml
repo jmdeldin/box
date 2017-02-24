@@ -1,0 +1,21 @@
+---
+- name: hacky ssh-agent
+  lineinfile:
+    dest: ~/.bashrc
+    state: present
+    line: '[ -z $SSH_AGENT_PID ] && eval `ssh-agent -s` && ssh-add'
+
+- name: copy SSH keys over
+  copy:
+    src: ~/{{item}}
+    dest: /home/{{ansible_ssh_user}}/{{item}}
+    mode: 0600
+  with_items:
+    - .ssh/id_rsa
+    - .ssh/id_rsa.pub
+
+- name: source custom app config
+  lineinfile:
+    dest: ~/.bashrc
+    state: present
+    line: "[ -f /vagrant/app_env.sh ] && source /vagrant/app_env.sh"

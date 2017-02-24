@@ -3,8 +3,6 @@
   become: True
   with_items:
     - elasticsearch
-    - nodejs
-    - npm
     - openjdk-8-jre-headless
     - openvpn
 
@@ -23,7 +21,3 @@
     - 'http.cors.enabled: true'
     - 'http.cors.allow-origin: "*"'
   notify: [restart ES]
-
-- name: link node
-  file: path=/usr/local/bin/node src=/usr/bin/nodejs state=link
-  become: True

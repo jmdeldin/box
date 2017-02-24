@@ -26,3 +26,21 @@
     dest: ~/.rbenv/plugins/ruby-build
     update: False
   tags: [ruby]
+
+- name: install default ruby
+  shell: ~/.rbenv/bin/rbenv install {{default_ruby}}
+  args:
+    creates: ~/.rbenv/shims/jruby
+  when: default_ruby is defined
+
+- name: set default ruby
+  shell: ~/.rbenv/bin/rbenv global {{default_ruby}}
+  args:
+    creates: ~/.rbenv/version
+  when: default_ruby is defined
+
+- name: install bundler
+  shell: ~/.rbenv/shims/gem install bundler --version {{bundler_version}}
+  args:
+    creates: ~/.rbenv/shims/bundler
+  when: bundler_version is defined
