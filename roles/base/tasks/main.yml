@@ -10,6 +10,8 @@
   become: True
   tags: [packages]
   with_items:
+    - brltty # not sure how these packages end up on ubuntu 16.10
+    - xbrlapi
     - cheese
     - deja-dup
     - empathy
