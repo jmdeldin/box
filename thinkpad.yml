@@ -50,6 +50,20 @@
       with_items:
         - compton
         - i3
-        - pavucontrol
         - rxvt-unicode
         - xbacklight
+
+    - name: install music packages
+      apt: pkg={{item}} state=installed
+      become: True
+      with_items:
+        - mpc
+        - mpd
+        - ncmpc
+        - pavucontrol
+      tags: [music]
+
+    - name: disable system-wide mpd
+      service: enabled=no name=mpd
+      become: True
+      tags: [music]
