@@ -1,0 +1,24 @@
+---
+- hosts: all
+  vars:
+    default_ruby: jruby-1.7.26
+    bundler_version: 1.8
+  roles:
+    - base
+    - highseas
+    - node
+    - ruby
+    - vagrant
+  tasks:
+    - name: install node deps
+      npm: name={{item}} global=yes
+      become: True
+      with_items:
+        - gulp
+        - bower
+        # TODO: May need these:
+        # - yo
+        # - node-gyp
+        # - karma
+        # - protractor
+        # - phantomjs
