@@ -3,8 +3,8 @@
   become: True
   with_items:
     - elasticsearch
+    - libcurl4-openssl-dev
     - openjdk-8-jre-headless
-    - openvpn
 
 - name: ensure ES starts as a daemon
   lineinfile: dest=/etc/default/elasticsearch state=present line="START_DAEMON=true"

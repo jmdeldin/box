@@ -9,6 +9,7 @@
     - gnupg2
     - gnupg-agent
     - openssh-server
+    - openvpn
     - virtualbox
     - zsh
 
