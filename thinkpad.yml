@@ -9,6 +9,7 @@
     - janitor
     - devel
     - firewall
+    - golang
 
   tasks:
     - name: add repo for latest 0ad

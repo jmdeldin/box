@@ -1,0 +1,16 @@
+- name: download golang
+  get_url:
+    dest: ~/src/vendor/go1.8.linux-amd64.tar.gz
+    url: https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
+
+- name: create GOPATH
+  file:
+    path: ~/go
+    state: directory
+
+- name: install golang
+  unarchive:
+    src: ~/src/vendor/go1.8.linux-amd64.tar.gz
+    dest: /usr/local/
+    creates: /usr/local/go
+  become: True
