@@ -1,30 +1,28 @@
-- shell: /bin/true
-  register: no_cleanup_by_default
-
 - name: Remove things no one cares about
-  when: no_cleanup_by_default is not defined
+  when: cleanup is defined
   tags: janitor
   file: path={{item}} state=absent
   with_items:
+    - ~/.ICEauthority
     - ~/.android
     - ~/.cache
     - ~/.compiz
     - ~/.gconf
+    - ~/.gnome
+    - ~/.mplayer
     - ~/.pki
     - ~/.pry_history
     - ~/.sudo_as_admin_successful
+    - ~/.thumbnails
     - ~/.xournal
     - ~/.xsel.log
     - ~/.xsession-errors
     - ~/.xsession-errors.old
     - ~/.zcompdump
 
-- shell: /bin/true
-  register: no_nuclear_option
-
-- name: Remove the things I do not care about but should ignore (most of the time)
-  when: no_nuclear_option is not defined
-  tags: nuke
+- name: Remove semi-useful but mostly garbage directories
+  when: nuclear is defined
+  tags: janitor
   file: path={{item}} state=absent
   with_items:
     - ~/.Xauthority
@@ -34,5 +32,3 @@
     - ~/.mu
     - ~/.npm
     - ~/.rbenv
-    - ~/.drum
-    - ~/.sorg
