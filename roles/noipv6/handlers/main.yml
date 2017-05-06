@@ -1,0 +1,3 @@
+- name: restart procps
+  shell: service procps reload
+  become: True

@@ -10,6 +10,7 @@
     - devel
     - firewall
     - golang
+    - noipv6
 
   tasks:
     - name: add repo for latest 0ad

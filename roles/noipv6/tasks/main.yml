@@ -1,0 +1,9 @@
+---
+# https://askubuntu.com/questions/905866/new-ubuntu-17-04-problem-your-connection-was-interrupted
+# http://www.neuraldump.com/2016/11/how-to-disable-ipv6-in-ubuntu-16-04-xenial-xerus/
+- name: Use IPv4 because Ubuntu 17.04 has an annoying bug
+  copy: src=../templates/etc/sysctl.d/99-disable-ipv6.conf
+        dest=/etc/sysctl.d/99-disable-ipv6.conf
+  become: True
+  tags: [net]
+  notify: [restart procps]
