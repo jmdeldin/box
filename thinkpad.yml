@@ -69,3 +69,11 @@
       service: enabled=no name=mpd
       become: True
       tags: [music]
+
+    - name: Mount tiny hard drive
+      mount:
+        name: /media/jmdeldin/scratch
+        src: /dev/sdb1
+        fstype: ext4
+        state: present
+      become: True
