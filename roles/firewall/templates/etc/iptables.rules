@@ -1,3 +1,5 @@
+# -*-sh-*-
+
 # iptables -L -n -v
 # iptables -F
 # iptables-restore < ~/.rc.firewall
@@ -39,11 +41,14 @@
 # Allow ping
 -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
 
+# Allow 0ad
+-A OUTPUT -p udp -m udp --sport 20595 -j ACCEPT
+
 # log iptables denied calls
 -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
 
 # Reject all other inbound - default deny unless explicitly allowed policy
-# -A INPUT -j REJECT
-# -A FORWARD -j REJECT
+-A INPUT -j REJECT
+-A FORWARD -j REJECT
 
 COMMIT
