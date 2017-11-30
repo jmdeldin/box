@@ -4,10 +4,8 @@
   become: True
   tags: [emacs, essentials]
   with_items:
-    - emacs24
-    - git
+    - emacs
     - gnupg2
-    - gnupg-agent
     - openssh-server
     - openvpn
     - virtualbox
@@ -24,7 +22,6 @@
     - curl
     - exiftool
     - imagemagick
-    - iotop
     - parallel
     - pv
     - silversearcher-ag
@@ -42,7 +39,11 @@
   tags: [essentials]
 
 - name: clone dotfiles
-  git: repo=git@github.com:jmdeldin/dotfiles.git dest=~/src/etc update=False
+  git:
+    repo: git@github.com:jmdeldin/dotfiles.git
+    dest: ~/src/etc
+    update: False
+    accept_hostkey: True
   tags: [essentials]
 
 - name: create XDG_CONFIG_HOME
@@ -62,6 +63,7 @@
     - .Xresources
     - .Xmodmap
     - .xprofile
+    - .xinitrc
     - .config/i3
     - .config/i3status
     - .config/mpd
@@ -102,10 +104,11 @@
   tags: private
 
 - name: download vagrant
+  tags: vm
   get_url:
-    dest: ~/src/vendor/vagrant_1.9.1.deb
-    url: https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb
+    dest: ~/src/vendor/vagrant_2.0.1.deb
+    url: https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.deb
 
 - name: install vagrant
-  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_1.9.1.deb
   become: True
+  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_2.0.1.deb

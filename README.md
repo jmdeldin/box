@@ -9,7 +9,7 @@ management.
 Targets
 -------
 
-1. Development laptop (System76 Galago UltraPro) running Ubuntu 16.04
+1. Development laptop (Thinkpad T460p) running Ubuntu 17.10
 2. Home backup server "VCR" (named for its form factor)
 
 Prerequisites
@@ -27,7 +27,7 @@ To run an arbitrary command:
 
 To execute specific tagged tasks from the "playbook":
 
-    ansible-playbook -i hosts --tags "ruby" system76.yml
+    ansible-playbook -i hosts --tags "ruby" thinkpad.yml
 
 To run the entire playbook:
 

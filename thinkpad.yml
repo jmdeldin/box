@@ -3,77 +3,182 @@
 # Ensure you do this for VirtualBox: BIOS -> Security > Virtualization >
 # Enable Intel stuff.
 ---
-- hosts: localhost
+- hosts: devel
+  vars:
+    default_ruby: 2.4.2
   roles:
     - base
-    - janitor
     - devel
     - firewall
-    - golang
-    - noipv6
-
+    - janitor
+    - ruby
   tasks:
-    - name: add repo for latest 0ad
-      apt_repository: repo=ppa:wfg/0ad
-      become: True
-      tags: [games]
 
-    - name: install misc software
+    - name: window manager needs
+      become: True
       apt: pkg={{item}} state=installed
-      become: True
-      tags: [system76, packages]
+      tags: wm
       with_items:
-        - 0ad
-        - borgbackup
-        - chromium-browser
-        - darktable
-        - gcolor2 # color picker
-        - gimp
-        - gnome-tweak-tool # TODO REMOVE
-        - guvcview # webcam
-        - gparted
-        - ledger
-        - mpv
-        - redshift
-        - unity-tweak-tool # TODO REMOVE
-        - xournal
-
-    - name: kill stupid update notifier
-      file: path={{item}} state=absent
-      become: True
-      tags: [system76]
-      with_items:
-        - /etc/cron.weekly/update-notifier-common
-        - /etc/cron.daily/update-notifier-common
-
-    - name: install i3 stuff
-      apt: pkg={{item}} state=installed
-      become: True
-      with_items:
+        - acpi
         - compton
-        - i3
+        - i3-wm
+        - i3lock
+        - i3status
+        - rofi
         - rxvt-unicode
-        - xbacklight
+        - wicd
+        - xinit
+        - xinput
+
+    # https://bugs.launchpad.net/ubuntu/+source/isc-dhcp/+bug/1704174
+    - name: fix ubuntu wicd-apparmor bug
+      become: True
+      tags: net
+      lineinfile:
+        path: /etc/apparmor.d/sbin.dhclient
+        insertafter: '/usr/share/synce-hal/dhclient.conf r,'
+        line: '/var/lib/wicd/dhclient.conf r,'
+        state: present
+
+    - name: add repo for latest 0ad
+      become: True
+      apt_repository: repo=ppa:wfg/0ad
+      tags: games
+
+    - name: install 0ad
+      become: True
+      apt: pkg=0ad state=installed
+      tags: games
+
+    - name: install borg
+      become: True
+      tags: backup
+      apt: pkg=borgbackup state=installed
+
+    - name: install browsers
+      become: True
+      tags: browsers
+      apt: pkg={{item}} state=installed
+      with_items:
+        - chromium-browser
+        - firefox
+
+    - name: install GUI tools
+      become: True
+      tags: gui
+      apt: pkg={{item}} state=installed
+      with_items:
+        - guvcview # webcam
+        - pinentry-gtk2
+        - redshift
+
+    - name: install creative tools
+      become: True
+      tags: creative
+      apt: pkg={{item}} state=installed
+      with_items:
+        - darktable
+        - feh
+        - gimp
+        - xournal # pdf annotations
+        - zathura # pdf viewer
+
+    - name: install media tools
+      become: True
+      tags: media
+      apt: pkg={{item}} state=installed
+      with_items:
+        - mpv
+
+    - name: install terminal tools
+      become: True
+      tags: term
+      apt: pkg={{item}} state=installed
+      with_items:
+        - ledger
+        - firejail
+        - iotop
 
     - name: install music packages
-      apt: pkg={{item}} state=installed
       become: True
+      tags: music
+      apt: pkg={{item}} state=installed
       with_items:
+        - libavcodec-extra # for mp3s
         - mpc
         - mpd
         - ncmpc
         - pavucontrol
-      tags: [music]
 
     - name: disable system-wide mpd
-      service: enabled=no name=mpd
       become: True
-      tags: [music]
+      service: enabled=no name=mpd
+      tags: music
+
+    - name: Mount /tmp as tmpfs
+      become: True
+      tags: space
+      mount:
+        name: /tmp
+        src: tmpfs
+        fstype: tmpfs
+        opts: "size=2048M"
+        state: mounted
 
     - name: Mount tiny hard drive
+      become: True
+      tags: space
       mount:
         name: /media/jmdeldin/scratch
         src: /dev/sdb1
         fstype: ext4
         state: present
+
+    - name: Destroy Ubuntu motd spyware service
       become: True
+      tags: cleanup
+      file:
+        path: "{{item}}"
+        state: absent
+      with_items:
+        - /etc/default/motd-news
+        - /etc/update-motd.d
+
+    - name: Remove terrible network service -- this hangs reboots by 2 min
+      become: True
+      systemd:
+        name: systemd-networkd-wait-online.service
+        enabled: no
+        state: stopped
+        daemon_reload: yes
+
+    - name: Install email tools
+      become: True
+      tags: email
+      apt: pkg={{item}} state=installed
+      with_items:
+        - mu4e
+        - offlineimap
+
+    # TODO: handle if no bin
+    - name: link bin
+      file:
+        path: ~/bin
+        src: ~/src/bin
+        state: link
+
+    - name: make firejail 0.9.5 work for network connections (remove line)
+      become: True
+      tags: security
+      lineinfile:
+        path: /etc/firejail/disable-common.inc
+        regexp: '^blacklist /var/run/systemd$'
+        state: absent
+
+    - name: make firejail 0.9.5 work for network connections (replace + comment out)
+      become: True
+      tags: security
+      lineinfile:
+        path: /etc/firejail/disable-common.inc
+        line: '# blacklist /var/run/systemd'
+        state: present
