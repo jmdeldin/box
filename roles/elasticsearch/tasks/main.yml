@@ -1,0 +1,19 @@
+- name: install ES
+  become: True
+  apt: pkg=elasticsearch state=installed
+
+- name: ensure ES starts as a daemon
+  lineinfile: dest=/etc/default/elasticsearch state=present line="START_DAEMON=true"
+  become: True
+  notify: [restart ES]
+
+- name: make ES unsafe and available for elasticsearch-head tool
+  become: True
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    state: present
+    line: "{{item}}"
+  with_items:
+    - 'http.cors.enabled: true'
+    - 'http.cors.allow-origin: "*"'
+  notify: [restart ES]

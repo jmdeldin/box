@@ -1,22 +1,13 @@
 ---
 - hosts: all
   vars:
-    default_ruby: jruby-1.7.19
-    bundler_version: 1.14.6
+    default_ruby: 1.9.3-p547
+    bundler_version: 1.8.0
   roles:
     - base
+    - elasticsearch
     - highseas
     - nginx_proxy
     - ruby
     - vagrant
   tasks:
-    - name: Install misc. programs
-      apt: pkg={{item}} state=installed
-      become: True
-      with_items:
-        - libmysqlclient-dev
-        - libxml2-dev # nokogiri
-        - libxslt-dev # nokogiri
-        - mariadb-server
-        - memcached
-        - redis-server
