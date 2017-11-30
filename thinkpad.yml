@@ -3,7 +3,7 @@
 # Ensure you do this for VirtualBox: BIOS -> Security > Virtualization >
 # Enable Intel stuff.
 ---
-- hosts: devel
+- hosts: 127.0.0.1
   vars:
     default_ruby: 2.4.2
   roles:
