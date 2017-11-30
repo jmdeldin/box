@@ -3,6 +3,7 @@
   become: True
   apt: pkg={{item}} state=installed
   with_items:
+    - aria2
     - rtorrent
 
 - name: create chromebook user
