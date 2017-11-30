@@ -10,22 +10,28 @@
   become: True
   tags: [packages]
   with_items:
-    - brltty # not sure how these packages end up on ubuntu 16.10
-    - xbrlapi
+    - at-spi2-core
+    - brltty # not sure how these packages end up on ubuntu 17.10
     - cheese
     - deja-dup
     - empathy
     - exim4
     - exim4-base
     - exim4-config
+    - gnome-keyring
     - gnome-mahjongg
     - gnome-mines
+    - lxc
+    - lxd
+    - pinentry-gnome3
     - rhythmbox
     - shotwell
+    - snapd
     - thunderbird
     - totem
     - unity-lens-shopping
     - unity-webapps
+    - xbrlapi
 
 - name: install basic system packages
   become: True
