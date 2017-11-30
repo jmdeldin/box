@@ -1,0 +1,5 @@
+- name: Prefer IPv4 instead of IPv6 (fixes hanging while connecting to ubuntu servers)
+  copy: src=../templates/etc/apt/apt.conf.d/99force-ipv4
+        dest=/etc/apt/apt.conf.d/99force-ipv4
+  become: True
+  tags: net
