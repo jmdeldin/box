@@ -14,3 +14,11 @@
     - name: install sphinx
       become: True
       apt: pkg=sphinxsearch state=installed
+
+    - name: open up mysql
+      become: True
+      lineinfile:
+        dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+        regexp: '^bind-address\s*=(.+)$'
+        line: 'bind-address = 0.0.0.0'
+        state: present
