@@ -11,3 +11,6 @@
     - ruby
     - vagrant
   tasks:
+    - name: install sphinx
+      become: True
+      apt: pkg=sphinxsearch state=installed
