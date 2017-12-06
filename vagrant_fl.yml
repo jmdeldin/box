@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+    default_ruby: 2.4.2
+    bundler_version: 1.16.0
+  roles:
+    - base
+    - nginx_proxy
+    - node
+    - ruby
+    - vagrant
+  tasks:
+    - name: Install misc deps
+      become: True
+      apt: pkg={{item}} state=installed
+      with_items:
+        - postgresql
+        - libpq-dev
