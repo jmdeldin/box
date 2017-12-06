@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    default_ruby: jruby-9.0.5.0
+    bundler_version: 1.16.0
+  roles:
+    - base
+    - highseas
+    - nginx_proxy
+    - ruby
+    - vagrant
+  tasks:
