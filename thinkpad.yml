@@ -20,6 +20,7 @@
       tags: wm
       with_items:
         - acpi
+        - arandr # easier than memorizing xrandr for mirroring
         - compton
         - i3-wm
         - i3lock
@@ -62,6 +63,7 @@
       with_items:
         - chromium-browser
         - firefox
+        - fonts-ubuntu-font-family-console
 
     - name: install GUI tools
       become: True
@@ -80,6 +82,7 @@
         - darktable
         - feh
         - gimp
+        - graphviz
         - xournal # pdf annotations
         - zathura # pdf viewer
 
