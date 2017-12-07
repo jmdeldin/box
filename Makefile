@@ -1,11 +1,11 @@
 thinkpad:
 	ansible-playbook -i hosts thinkpad.yml -K
 
-clobber:
+clobber: clean
 	ansible-playbook -i hosts thinkpad.yml -K --tags janitor -e cleanup=True
 
-nuclear:
+nuclear: clobber
 	ansible-playbook -i hosts thinkpad.yml -K --tags janitor -e nuclear=True
 
 clean:
-	rm *.retry
+	rm -f *.retry
