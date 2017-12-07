@@ -11,11 +11,17 @@
     - exim4
     - exim4-base
     - exim4-config
+    - gconf2
+    - geoclue-2.0
     - gnome-keyring
     - gnome-mahjongg
     - gnome-mines
+    - libgeoclue-2.0
+    - libgnome-keyring-common
     - lxc
+    - lxcfs
     - lxd
+    - open-iscsi
     - pinentry-gnome3
     - rhythmbox
     - shotwell
@@ -33,7 +39,9 @@
   with_items:
     - ~/.ICEauthority
     - ~/.android
-    - ~/.cache
+    - ~/.cache/0ad
+    - ~/.cache/chromium
+    - ~/.cache/darktable
     - ~/.compiz
     - ~/.lesshst
     - ~/.gconf
@@ -41,9 +49,13 @@
     - ~/.mozilla
     - ~/.mplayer
     - ~/.pki
+    - ~/.profile
     - ~/.pry_history
+    - ~/.selected_editor
     - ~/.sudo_as_admin_successful
     - ~/.thumbnails
+    - ~/.viminfo
+    - ~/.wicd
     - ~/.xournal
     - ~/.xsel.log
     - ~/.xsession-errors
