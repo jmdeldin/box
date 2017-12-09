@@ -82,6 +82,7 @@
         - darktable
         - feh
         - gimp
+        - git-annex
         - graphviz
         - xournal # pdf annotations
         - zathura # pdf viewer
