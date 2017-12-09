@@ -108,6 +108,7 @@
       tags: music
       apt: pkg={{item}} state=installed
       with_items:
+        - exfalso # tag management
         - libavcodec-extra # for mp3s
         - mpc
         - mpd
