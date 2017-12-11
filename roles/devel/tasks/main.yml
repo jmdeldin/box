@@ -8,7 +8,6 @@
     - gnupg2
     - openssh-server
     - openvpn
-    - virtualbox
     - zsh
 
 - name: install convenient shell tools
@@ -67,6 +66,14 @@
               line="session required pam_limits.so"
   tags: [neo4j]
   become: True
+
+- name: install vagrant dependencies
+  apt: pkg={{item}} state=installed
+  become: True
+  tags: [vagrant]
+  with_items:
+    - nfs-kernel-server
+    - virtualbox
 
 - name: download vagrant
   tags: vm
