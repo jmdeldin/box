@@ -6,12 +6,17 @@
 - hosts: 127.0.0.1
   vars:
     default_ruby: 2.4.2
+    sudo_user: "{{ansible_ssh_user}}"
+    sudo_filename: ansible_added
+    sudo_commands:
+      - "/home/{{ansible_ssh_user}}/bin/iggy"
   roles:
     - base
     - devel
     - firewall
     - janitor
     - ruby
+    - sudoers
   tasks:
 
     - name: window manager needs
@@ -164,13 +169,6 @@
       with_items:
         - mu4e
         - offlineimap
-
-    # TODO: handle if no bin
-    - name: link bin
-      file:
-        path: ~/bin
-        src: ~/src/bin
-        state: link
 
     - name: make firejail 0.9.5 work for network connections (remove line)
       become: True

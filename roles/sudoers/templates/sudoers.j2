@@ -1,0 +1,3 @@
+{% for cmd in sudo_commands %}
+  {{ sudo_user }} ALL=(root) NOPASSWD: {{ cmd }}
+{% endfor %}

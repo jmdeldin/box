@@ -68,14 +68,6 @@
   tags: [neo4j]
   become: True
 
-- shell: /bin/true
-  register: no_private_linking_by_default
-
-- name: Link local bin
-  file: src=~/src/bin dest=~/bin state=link
-  when: no_private_linking_by_default is not defined
-  tags: private
-
 - name: download vagrant
   tags: vm
   get_url:

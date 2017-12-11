@@ -1,0 +1,10 @@
+---
+- name: Create sudoers.d entry
+  become: True
+  template:
+    src: ../templates/sudoers.j2
+    dest: "/etc/sudoers.d/{{sudo_filename}}"
+    mode: 0440
+    owner: root
+    group: root
+    validate: "/usr/sbin/visudo -cf %s"
