@@ -32,6 +32,7 @@
         - i3status
         - rofi
         - rxvt-unicode
+        - scrot
         - wicd
         - xinit
         - xinput
@@ -113,6 +114,7 @@
       tags: music
       apt: pkg={{item}} state=installed
       with_items:
+        - alsa-utils
         - exfalso # tag management
         - libavcodec-extra # for mp3s
         - mpc
@@ -185,3 +187,10 @@
         path: /etc/firejail/disable-common.inc
         line: '# blacklist /var/run/systemd'
         state: present
+
+    - name: setup printer
+      become: True
+      tags: printer
+      apt: pkg={{item}} state=installed
+      with_items:
+        - cups
