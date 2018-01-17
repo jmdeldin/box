@@ -19,15 +19,20 @@
     - libgeoclue-2.0
     - libgnome-keyring-common
     - lxc
+    - lxc-common
     - lxcfs
     - lxd
+    - lxd-client
     - open-iscsi
+    - open-vm-tools
+    - pastebinit
     - pinentry-gnome3
     - rhythmbox
     - shotwell
     - snapd
     - thunderbird
     - totem
+    - ubuntu-advantage-tools
     - unity-lens-shopping
     - unity-webapps
     - xbrlapi
