@@ -1,10 +1,4 @@
 ---
-- name: hacky ssh-agent
-  lineinfile:
-    dest: ~/.bashrc
-    state: present
-    line: '[ -z $SSH_AGENT_PID ] && eval `ssh-agent -s` && ssh-add'
-
 - name: copy SSH keys over
   copy:
     src: ~/{{item}}
@@ -13,6 +7,14 @@
   with_items:
     - .ssh/id_rsa
     - .ssh/id_rsa.pub
+
+- name: automatically add keys to SSH agent when needed
+  lineinfile:
+    dest: ~/.ssh/config
+    line: "AddKeysToAgent yes"
+    state: present
+    create: True
+    mode: 0600
 
 - name: source custom app config
   lineinfile:
