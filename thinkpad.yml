@@ -137,6 +137,14 @@
         opts: "size=2048M"
         state: mounted
 
+    - name: setup bluetooth
+      become: True
+      tags: bluetooth
+      apt: pkg={{item}} state=installed
+      with_items:
+        - bluez
+        - pulseaudio-module-bluetooth
+
     - name: Mount tiny hard drive
       become: True
       tags: space
