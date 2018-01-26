@@ -91,6 +91,7 @@
         - gimp
         - git-annex
         - graphviz
+        - libreoffice
         - xournal # pdf annotations
         - zathura # pdf viewer
 
