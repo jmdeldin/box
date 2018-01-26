@@ -68,15 +68,15 @@
   become: True
 
 - name: install vagrant dependencies
-  apt: pkg={{item}} state=installed
   become: True
-  tags: [vagrant]
+  tags: vagrant
+  apt: pkg={{item}} state=installed
   with_items:
     - nfs-kernel-server
     - virtualbox
 
 - name: download vagrant
-  tags: vm
+  tags: vagrant
   get_url:
     dest: ~/src/vendor/vagrant_2.0.1.deb
     url: https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.deb
@@ -84,3 +84,10 @@
 - name: install vagrant
   become: True
   apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_2.0.1.deb
+
+- name: make NFS password-free
+  become: True
+  tags: vagrant
+  copy:
+    src: ../templates/etc/sudoers.d/vagrant
+    dest: /etc/sudoers.d/vagrant
