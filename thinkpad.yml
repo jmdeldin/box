@@ -70,6 +70,7 @@
         - chromium-browser
         - firefox
         - fonts-ubuntu-font-family-console
+        - ttf-ubuntu-font-family
 
     - name: install GUI tools
       become: True
