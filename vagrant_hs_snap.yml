@@ -22,3 +22,8 @@
         regexp: '^bind-address\s*=(.+)$'
         line: 'bind-address = 0.0.0.0'
         state: present
+
+    - name: configure binlog
+      become: True
+      lineinfile:
+        dest: /etc/mysql/mariadb.conf.d/50-server.cnf
