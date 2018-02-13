@@ -1,0 +1,60 @@
+---
+- hosts: all
+  vars:
+    default_ruby: jruby-1.7.15
+    bundler_version: 1.8.0
+    zeromq_version: 3.2.4
+  roles:
+    - base
+    - elasticsearch
+    - highseas
+    - nginx_proxy
+    - ruby
+    - vagrant
+  tasks:
+    - name: prereqs for 0mq
+      become: True
+      apt: pkg={{item}} state=installed
+      with_items:
+        - automake
+        - build-essential
+        - libtool-bin
+
+    - name: create a directory for stashing downloads
+      become: True
+      file:
+        path: /opt/src
+        state: directory
+
+    - name: download 0mq
+      become: True
+      unarchive:
+        src: http://download.zeromq.org/zeromq-{{zeromq_version}}.tar.gz
+        remote_src: yes
+        dest: /opt/src
+        creates: /opt/src/zeromq-{{zeromq_version}}
+
+    - name: install 0mq
+      become: True
+      shell: './autogen.sh && ./configure --prefix=/usr/local --datarootdir=/usr/local/share && make && make install'
+      args:
+        chdir: /opt/src/zeromq-{{zeromq_version}}
+        creates: /usr/local/lib/libzmq.so
+
+    - name: setup a fake directory for bad ES-path searches
+      become: True
+      file:
+        path: /opt/fake_es/lib
+        recurse: yes
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    - name: link ES jar for aforementioned garbage searches
+      become: True
+      file:
+        src: /usr/share/java/elasticsearch-1.7.3.jar
+        dest: /opt/fake_es/lib/elasticsearch-1.7.3.jar
+        state: link
+        owner: ubuntu
+        group: ubuntu
