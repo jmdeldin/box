@@ -11,9 +11,13 @@
     - ruby
     - vagrant
   tasks:
-    - name: install sphinx
+    - name: install sphinx and MQTT
       become: True
-      apt: pkg=sphinxsearch state=installed
+      apt: pkg={{item}} state=installed
+      with_items:
+        - mosquitto
+        - mosquitto-clients
+        - sphinxsearch
 
     - name: open up mysql
       become: True
