@@ -14,6 +14,7 @@
     - base
     - devel
     - firewall
+    - golang
     - janitor
     - ruby
     - sudoers
