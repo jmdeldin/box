@@ -31,3 +31,25 @@
       become: True
       lineinfile:
         dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+        regexp: '^#log_bin(.*)$'
+        state: absent
+
+    - name: configure binlog
+      become: True
+      lineinfile:
+        dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+        line: 'log_bin = /var/log/mysql/mysql-bin.log'
+        state: present
+
+    - name: open redis up
+      become: True
+      lineinfile:
+        dest: /etc/redis/redis.conf
+        regexp: '^bind (.+)$'
+        line: 'bind 0.0.0.0'
+        state: present
+
+  handlers:
+    - name: restart redis
+      become: True
+      service: name=redis state=restarted
