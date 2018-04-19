@@ -112,6 +112,7 @@
         - iotop
         - ledger
         - unzip
+        - wakeonlan
         - zip
 
     - name: install music packages
