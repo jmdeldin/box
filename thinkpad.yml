@@ -108,9 +108,11 @@
       tags: term
       apt: pkg={{item}} state=installed
       with_items:
-        - ledger
         - firejail
         - iotop
+        - ledger
+        - unzip
+        - zip
 
     - name: install music packages
       become: True
