@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars:
-    default_ruby: jruby-1.7.16
+    default_ruby: jruby-9.0.5.0
     bundler_version: 1.16.0
   roles:
     - base
