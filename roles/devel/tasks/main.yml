@@ -21,6 +21,7 @@
     - curl
     - exiftool
     - imagemagick
+    - jq
     - parallel
     - pv
     - silversearcher-ag
