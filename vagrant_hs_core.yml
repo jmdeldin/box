@@ -3,7 +3,7 @@
   vars:
     default_ruby: jruby-9.1.12.0
     bundler_version: 1.15.3
-    default_node: v7.10.1
+    default_node: v10.1.0
   roles:
     - base
     - highseas
