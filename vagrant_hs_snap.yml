@@ -2,6 +2,7 @@
 - hosts: all
   vars:
     default_ruby: 1.9.3-p551
+    old_ruby: True
     bundler_version: 1.8.0
     elasticsearch_version: 1.7.4
   roles:
@@ -49,6 +50,10 @@
         regexp: '^bind (.+)$'
         line: 'bind 0.0.0.0'
         state: present
+
+    - name: install mysql workbench
+      become: True
+      apt: pkg=mysql-workbench state=present
 
   handlers:
     - name: restart redis

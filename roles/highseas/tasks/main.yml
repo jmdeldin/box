@@ -2,7 +2,6 @@
   apt: pkg={{item}} state=present
   become: True
   with_items:
-    - libcurl4-openssl-dev
     - libmysqlclient-dev
     - libxml2-dev # nokogiri
     - libxslt-dev # nokogiri

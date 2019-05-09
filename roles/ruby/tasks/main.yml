@@ -2,15 +2,37 @@
 - name: Install deps for gems
   apt: pkg={{item}} state=present
   become: True
-  tags: [ruby, test]
+  tags: [ruby]
   with_items:
+    - autoconf # rbenv
+    - bison # rbenv
     - build-essential
     - libffi-dev # rbenv
+    - libgdbm-dev # rbenv
+    - libncurses-dev # rbenv
     - libreadline-dev # rbenv
-    - libsqlite3-dev # sqlite
+    - libsqlite3-dev
     - libyaml-dev # rbenv
     - sqlite3
-    - zlib1g-dev
+    - zlib1g-dev # rbenv
+
+- name: Install deps for >= 2.3 ruby
+  apt: pkg={{item}} state=present
+  become: True
+  tags: [ruby]
+  with_items:
+    - libssl-dev # rbenv
+    - libcurl4-openssl-dev
+  when: old_ruby is not defined
+
+- name: Install deps for < 2.3 ruby
+  apt: pkg={{item}} state=present
+  become: True
+  tags: [ruby]
+  with_items:
+    - libcurl-openssl1.0-dev
+    - libssl1.0-dev
+  when: old_ruby is defined
 
 - name: setup rbenv
   git:
