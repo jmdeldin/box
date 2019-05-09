@@ -1,16 +1,16 @@
 ---
 - name: Install deps for gems
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   become: True
-  tags: [ruby]
+  tags: [ruby, test]
   with_items:
     - build-essential
     - libffi-dev # rbenv
     - libreadline-dev # rbenv
     - libsqlite3-dev # sqlite
-    - libssl-dev # rbenv
     - libyaml-dev # rbenv
     - sqlite3
+    - zlib1g-dev
 
 - name: setup rbenv
   git:
