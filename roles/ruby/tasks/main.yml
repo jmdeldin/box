@@ -30,6 +30,7 @@
   become: True
   tags: [ruby]
   with_items:
+    - libcurl3
     - libcurl-openssl1.0-dev
     - libssl1.0-dev
   when: old_ruby is defined
