@@ -19,3 +19,9 @@
     - 'http.cors.enabled: true'
     - 'http.cors.allow-origin: "*"'
   notify: [restart ES]
+
+- name: setup ES service
+  become: True
+  service:
+    name: elasticsearch
+    enabled: True
