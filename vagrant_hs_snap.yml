@@ -28,6 +28,7 @@
         regexp: '^bind-address\s*=(.+)$'
         line: 'bind-address = 0.0.0.0'
         state: present
+      notify: restart mysql
 
     - name: configure binlog
       become: True
@@ -59,3 +60,7 @@
     - name: restart redis
       become: True
       service: name=redis state=restarted
+
+    - name: restart mysql
+      become: True
+      service: name=mysql state=restarted
