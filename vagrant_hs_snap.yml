@@ -1,8 +1,9 @@
 ---
 - hosts: all
   vars:
-    default_ruby: 1.9.3-p547
+    default_ruby: 1.9.3-p551
     bundler_version: 1.8.0
+    elasticsearch_version: 1.7.4
   roles:
     - base
     - elasticsearch
@@ -13,7 +14,7 @@
   tasks:
     - name: install sphinx and MQTT
       become: True
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - mosquitto
         - mosquitto-clients

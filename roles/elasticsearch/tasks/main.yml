@@ -1,6 +1,8 @@
-- name: install ES
+- name: install elasticsearch
   become: True
-  apt: pkg=elasticsearch state=installed
+  apt:
+    deb: https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-{{elasticsearch_version}}.deb
+  notify: [restart ES]
 
 - name: ensure ES starts as a daemon
   lineinfile: dest=/etc/default/elasticsearch state=present line="START_DAEMON=true"
