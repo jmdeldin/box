@@ -11,25 +11,6 @@
     - ruby
     - vagrant
   tasks:
-    - name: Install MariaDB
-      apt: pkg=mariadb-server state=installed
-      become: True
-
-    - name: Install nvm
-      git:
-        repo: https://github.com/creationix/nvm.git
-        dest: ~/.nvm
-        update: False
-        accept_hostkey: True
-      tags: [node]
-
-    - name: add nvm to bashrc
-      lineinfile:
-        dest: ~/.bashrc
-        state: present
-        line: "export NVM_DIR=$HOME/.nvm; source $NVM_DIR/nvm.sh"
-      tags: [node]
-
     - name: install default node
       shell: "bash -c 'source ~/.nvm/nvm.sh && nvm install {{default_node}} && nvm alias default {{default_node}}'"
       args:
