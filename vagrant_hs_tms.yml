@@ -1,8 +1,8 @@
 ---
 - hosts: all
   vars:
-    default_ruby: jruby-9.1.12.0
-    bundler_version: 1.15.3
+    default_ruby: jruby-9.2.5.0
+    bundler_version: 1.17.3
   roles:
     - base
     - highseas

@@ -8,6 +8,7 @@
     - cheese
     - deja-dup
     - empathy
+    - evince
     - exim4
     - exim4-base
     - exim4-config
@@ -36,6 +37,7 @@
     - unity-lens-shopping
     - unity-webapps
     - xbrlapi
+    - xserver-xorg-input-synaptics
 
 - name: Remove things no one cares about
   when: cleanup is defined

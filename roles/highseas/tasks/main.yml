@@ -1,5 +1,5 @@
 - name: install system deps
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   become: True
   with_items:
     - libcurl4-openssl-dev
