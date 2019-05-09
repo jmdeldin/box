@@ -156,7 +156,7 @@
       become: True
       tags: space
       mount:
-        name: /media/jmdeldin/scratch
+        name: /media/{{ansible_ssh_user}}/scratch
         src: /dev/sdb1
         fstype: ext4
         state: present
