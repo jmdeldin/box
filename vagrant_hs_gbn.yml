@@ -1,0 +1,15 @@
+---
+- hosts: all
+  vars:
+    default_node: v10.1.0
+  roles:
+    - base
+    - highseas
+    - nginx_proxy
+    - vagrant
+  tasks:
+    - name: install default node
+      shell: "bash -c 'source ~/.nvm/nvm.sh && nvm install {{default_node}} && nvm alias default {{default_node}}'"
+      args:
+        creates: ~/.nvm/versions/node/{{default_node}}
+      tags: [node]
