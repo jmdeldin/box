@@ -1,0 +1,88 @@
+---
+- hosts: jmdroplet
+  vars:
+    default_ruby: 2.6.0
+    bundler_version: 2.0
+  roles:
+    - base
+    - node
+    - ruby
+  tasks:
+    - name: install nginx
+      apt: pkg=nginx state=installed
+      become: True
+      tags: [nginx]
+
+    - name: Ensure wheel group exists
+      group:
+        name: wheel
+        state: present
+
+    - name: Allow wheel group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+      become: yes
+
+    - name: install fail2ban
+      apt: pkg=fail2ban state=present
+      become: true
+
+    - name: Delete root password
+      user:
+        name: root
+        password: ""
+      become: yes
+
+    - name: Remove authorized_keys file for root user
+      file:
+        path: /root/.ssh/authorized_keys
+        state: absent
+      become: yes
+
+    - name: Disallow root SSH access
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^PermitRootLogin"
+        line: "PermitRootLogin no"
+        state: present
+      become: yes
+      notify: Restart sshd
+
+    - name: Disallow password authentication
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^PasswordAuthentication"
+        line: "PasswordAuthentication no"
+        state: present
+      become: yes
+      notify: Restart sshd
+
+    - name: add certbot PPA
+      become: True
+      apt_repository: repo=ppa:certbot/certbot
+
+    - name: install certbot
+      apt: pkg=python-certbot-nginx state=present
+      become: true
+
+    - name: install DO certbot
+      apt: pkg=python3-certbot-dns-digitalocean state=present
+      become: true
+
+    - name: install redis
+      apt: pkg=redis state=present
+      become: true
+
+    - name: install msmtp
+      apt: pkg=msmtp state=present
+      become: true
+
+  handlers:
+    - name: Restart sshd
+      service:
+        name: ssh
+        state: restarted
+      become: yes

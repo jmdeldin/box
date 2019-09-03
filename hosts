@@ -2,3 +2,5 @@
 
 # host and credentials set in ~/.ssh/config
 vcr
+
+jmdroplet
