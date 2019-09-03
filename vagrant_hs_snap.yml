@@ -3,11 +3,10 @@
   vars:
     default_ruby: 1.9.3-p551
     old_ruby: True
-    bundler_version: 1.8.0
-    elasticsearch_version: 1.7.4
+    bundler_version: 1.7.8
+    binlog: True
   roles:
     - base
-    - elasticsearch
     - highseas
     - nginx_proxy
     - ruby
@@ -55,12 +54,3 @@
     - name: install mysql workbench
       become: True
       apt: pkg=mysql-workbench state=present
-
-  handlers:
-    - name: restart redis
-      become: True
-      service: name=redis state=restarted
-
-    - name: restart mysql
-      become: True
-      service: name=mysql state=restarted

@@ -1,9 +1,10 @@
 ---
 - hosts: all
   vars:
-    default_ruby: jruby-1.7.15
-    bundler_version: 1.8.0
+    default_ruby: jruby-1.7.26
+    bundler_version: 1.14.6
     zeromq_version: 3.2.4
+    elasticsearch_version: 1.7.3
   roles:
     - base
     - elasticsearch
@@ -14,7 +15,7 @@
   tasks:
     - name: prereqs for 0mq
       become: True
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - automake
         - build-essential
@@ -40,21 +41,3 @@
       args:
         chdir: /opt/src/zeromq-{{zeromq_version}}
         creates: /usr/local/lib/libzmq.so
-
-    - name: setup a fake directory for bad ES-path searches
-      become: True
-      file:
-        path: /opt/fake_es/lib
-        recurse: yes
-        state: directory
-        owner: ubuntu
-        group: ubuntu
-
-    - name: link ES jar for aforementioned garbage searches
-      become: True
-      file:
-        src: /usr/share/java/elasticsearch-1.7.3.jar
-        dest: /opt/fake_es/lib/elasticsearch-1.7.3.jar
-        state: link
-        owner: ubuntu
-        group: ubuntu

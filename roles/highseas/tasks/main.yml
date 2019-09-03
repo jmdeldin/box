@@ -16,3 +16,11 @@
     dest: ~/.nvm
     update: False
     accept_hostkey: True
+
+- name: Copy binlog template over
+  copy:
+    src: ../templates/etc/mysql/conf.d/binlog.conf
+    dest: /etc/mysql/conf.d/binlog.conf
+  become: True
+  when: binlog is defined
+  notify: restart mysql

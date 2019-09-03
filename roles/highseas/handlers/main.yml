@@ -1,0 +1,7 @@
+- name: restart redis
+  become: True
+  service: name=redis state=restarted
+
+- name: restart mysql
+  become: True
+  service: name=mysql state=restarted
