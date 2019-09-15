@@ -1,6 +1,6 @@
 ---
 - name: install essential dev tools
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   become: True
   tags: [emacs, essentials]
   with_items:
@@ -11,7 +11,7 @@
     - zsh
 
 - name: install convenient shell tools
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   become: True
   tags: [convenience]
   with_items:
@@ -71,7 +71,7 @@
 - name: install vagrant dependencies
   become: True
   tags: vagrant
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   with_items:
     - nfs-kernel-server
     - virtualbox

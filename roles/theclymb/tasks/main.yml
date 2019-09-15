@@ -13,7 +13,7 @@
     - deb-src
 
 - name: install mysql
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   become: True
   tags: [mysql, packages, theclymb]
   with_items:
@@ -37,7 +37,7 @@
   notify: [start ES]
 
 - name: install ruby gem lib dependencies
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   tags: [packages, ruby, theclymb]
   become: True
   with_items:
@@ -62,7 +62,7 @@
     - zeus
 
 - name: install other utilities
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   become: True
   tags: [packages, theclymb]
   with_items:

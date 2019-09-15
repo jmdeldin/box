@@ -22,7 +22,7 @@
 
     - name: window manager needs
       become: True
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       tags: wm
       with_items:
         - acpi
@@ -55,18 +55,18 @@
 
     - name: install 0ad
       become: True
-      apt: pkg=0ad state=installed
+      apt: pkg=0ad state=present
       tags: games
 
     - name: install borg
       become: True
       tags: backup
-      apt: pkg=borgbackup state=installed
+      apt: pkg=borgbackup state=present
 
     - name: install browsers
       become: True
       tags: browsers
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - chromium-browser
         - firefox
@@ -76,7 +76,7 @@
     - name: install GUI tools
       become: True
       tags: gui
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - guvcview # webcam
         - pinentry-gtk2
@@ -85,7 +85,7 @@
     - name: install creative tools
       become: True
       tags: creative
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - darktable
         - feh
@@ -99,14 +99,14 @@
     - name: install media tools
       become: True
       tags: media
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - mpv
 
     - name: install terminal tools
       become: True
       tags: term
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - firejail
         - iotop
@@ -119,7 +119,7 @@
     - name: install music packages
       become: True
       tags: music
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - alsa-utils
         - exfalso # tag management
@@ -147,7 +147,7 @@
     - name: setup bluetooth
       become: True
       tags: bluetooth
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - bluez
         - pulseaudio-module-bluetooth
@@ -182,7 +182,7 @@
     - name: Install email tools
       become: True
       tags: email
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - mu4e
         - offlineimap
@@ -206,7 +206,7 @@
     - name: setup printer
       become: True
       tags: printer
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - cups
         - lpr

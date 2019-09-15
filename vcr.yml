@@ -12,7 +12,7 @@
   tasks:
     - name: Install VCR packages
       become: True
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=present
       with_items:
         - firmware-realtek
         - libav-tools
