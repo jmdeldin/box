@@ -9,7 +9,7 @@
     - ruby
   tasks:
     - name: install nginx
-      apt: pkg=nginx state=installed
+      apt: pkg=nginx state=present
       become: True
       tags: [nginx]
 
