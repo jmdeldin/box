@@ -79,12 +79,12 @@
 - name: download vagrant
   tags: vagrant
   get_url:
-    dest: ~/src/vendor/vagrant_2.2.4.deb
-    url: https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
+    dest: ~/src/vendor/vagrant_2.2.5.deb
+    url: https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_x86_64.deb
 
 - name: install vagrant
   become: True
-  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_2.2.4.deb
+  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_2.2.5.deb
 
 - name: make NFS password-free
   become: True
