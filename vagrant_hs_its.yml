@@ -10,3 +10,6 @@
     - ruby
     - vagrant
   tasks:
+    - apt:
+        pkg: imagemagick
+        state: present
