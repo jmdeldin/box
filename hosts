@@ -1,4 +1,4 @@
-127.0.0.1 ansible_connection=local ansible_user=jm
+127.0.0.1 ansible_connection=local ansible_user=jm ansible_python_interpreter=/usr/bin/python3
 
 # host and credentials set in ~/.ssh/config
 vcr
