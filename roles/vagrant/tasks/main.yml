@@ -1,9 +1,10 @@
 ---
 - name: install basic packages
   become: True
-  apt: state=present name={{item}}
-  with_items:
-    - zip
+  apt:
+    state: present
+    pkg:
+      - zip
 
 - name: copy SSH keys over
   copy:

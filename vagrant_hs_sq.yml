@@ -15,11 +15,12 @@
   tasks:
     - name: prereqs for 0mq
       become: True
-      apt: pkg={{item}} state=present
-      with_items:
-        - automake
-        - build-essential
-        - libtool-bin
+      apt:
+        state: present
+        pkg:
+          - automake
+          - build-essential
+          - libtool-bin
 
     - name: create a directory for stashing downloads
       become: True

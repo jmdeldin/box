@@ -13,3 +13,4 @@
     - apt:
         pkg: imagemagick
         state: present
+      become: True

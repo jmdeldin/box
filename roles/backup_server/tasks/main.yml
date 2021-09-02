@@ -1,10 +1,11 @@
 ---
 - name: Install backup packages
   become: True
-  apt: pkg={{item}} state=present
-  with_items:
-    - cryptsetup
-    - lvm2
+  apt:
+    state: present
+    pkg:
+      - cryptsetup
+      - lvm2
 
 - name: Download borg
   become: True

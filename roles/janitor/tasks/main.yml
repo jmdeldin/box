@@ -1,43 +1,48 @@
 - name: remove garbage packages
-  apt: name={{item}} state=absent purge=yes
   become: True
   tags: janitor, packages
-  with_items:
-    - at-spi2-core
-    - brltty # not sure how these packages end up on ubuntu 17.10
-    - cheese
-    - deja-dup
-    - empathy
-    - evince
-    - exim4
-    - exim4-base
-    - exim4-config
-    - gconf2
-    - geoclue-2.0
-    - gnome-keyring
-    - gnome-mahjongg
-    - gnome-mines
-    - libgeoclue-2.0
-    - libgnome-keyring-common
-    - lxc
-    - lxc-common
-    - lxcfs
-    - lxd
-    - lxd-client
-    - open-iscsi
-    - open-vm-tools
-    - pastebinit
-    - pinentry-gnome3
-    - rhythmbox
-    - shotwell
-    - snapd
-    - thunderbird
-    - totem
-    - ubuntu-advantage-tools
-    - unity-lens-shopping
-    - unity-webapps
-    - xbrlapi
-    - xserver-xorg-input-synaptics
+  apt:
+    state: absent
+    purge: yes
+    pkg:
+      - at-spi2-core
+      - brltty
+      - cheese
+      - deja-dup
+      - empathy
+      - evince
+      - exim4
+      - exim4-base
+      - exim4-config
+      - gconf2
+      - geoclue-2.0
+      - gnome-keyring
+      - gnome-mahjongg
+      - gnome-mines
+      - libgeoclue-2.0
+      - libgnome-keyring-common
+      - lxc
+      - lxc-common
+      - lxcfs
+      - lxd
+      - lxd-client
+      - open-iscsi
+      - open-vm-tools
+      - pastebinit
+      - pidgin
+      - pidgin-otr
+      - pidgin-data
+      - pinentry-gnome3
+      - rhythmbox
+      - shotwell
+      - thunderbird
+      - totem
+      - ubuntu-advantage-tools
+      - unity-lens-shopping
+      - unity-webapps
+      - xbrlapi
+      - xserver-xorg-input-synaptics
+      - xiccd
 
 - name: Remove things no one cares about
   when: cleanup is defined

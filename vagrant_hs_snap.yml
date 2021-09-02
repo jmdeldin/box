@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars:
-    default_ruby: 1.9.3-p551
+    default_ruby: jruby-1.7.26
     old_ruby: True
     bundler_version: 1.7.8
     binlog: True
@@ -14,11 +14,12 @@
   tasks:
     - name: install sphinx and MQTT
       become: True
-      apt: pkg={{item}} state=present
-      with_items:
-        - mosquitto
-        - mosquitto-clients
-        - sphinxsearch
+      apt:
+        state: present
+        pkg:
+          - mosquitto
+          - mosquitto-clients
+          - sphinxsearch
 
     - name: open up mysql
       become: True
@@ -49,6 +50,15 @@
         dest: /etc/redis/redis.conf
         regexp: '^bind (.+)$'
         line: 'bind 0.0.0.0'
+        state: present
+    # NEED TO restart redis afterwards
+
+    - name: open memcached up
+      become: True
+      lineinfile:
+        dest: /etc/memcached.conf
+        regexp: '^-l 127.0.0.1'
+        line: '-l 0.0.0.0'
         state: present
 
     - name: install mysql workbench

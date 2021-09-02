@@ -1,8 +1,10 @@
 ---
 - name: install basic system packages
   become: True
-  apt: name={{item}} state=present
-  with_items:
-    - git
-    - htop
-    - rsync
+  apt:
+    state: present
+    pkg:
+      - aptitude
+      - git
+      - htop
+      - rsync

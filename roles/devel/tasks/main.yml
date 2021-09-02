@@ -1,38 +1,40 @@
 ---
 - name: install essential dev tools
-  apt: pkg={{item}} state=present
+  apt:
+    state: present
+    pkg:
+      - emacs
+      - gnupg2
+      - openssh-server
+      - openvpn
+      - zsh
   become: True
   tags: [emacs, essentials]
-  with_items:
-    - emacs
-    - gnupg2
-    - openssh-server
-    - openvpn
-    - zsh
 
 - name: install convenient shell tools
-  apt: pkg={{item}} state=present
   become: True
   tags: [convenience]
-  with_items:
-    - aspell-en # writing
-    - build-essential
-    - cloc
-    - curl
-    - exiftool
-    - imagemagick
-    - jq
-    - parallel
-    - pv
-    - silversearcher-ag
-    - slurm
-    - stow
-    - tmux
-    - tree
-    - wamerican # /usr/share/dict/words
-    - whois
-    - wordnet # writing
-    - xsel
+  apt:
+    state: present
+    pkg:
+      - aspell-en # writing
+      - build-essential
+      - cloc
+      - curl
+      - exiftool
+      - imagemagick
+      - jq
+      - parallel
+      - pv
+      - silversearcher-ag
+      - slurm
+      - stow
+      - tmux
+      - tree
+      - wamerican # /usr/share/dict/words
+      - whois
+      - wordnet # writing
+      - xsel
 
 - name: create the src working directory
   file: path=~/src/vendor state=directory
@@ -71,20 +73,21 @@
 - name: install vagrant dependencies
   become: True
   tags: vagrant
-  apt: pkg={{item}} state=present
-  with_items:
-    - nfs-kernel-server
-    - virtualbox
+  apt:
+    state: present
+    pkg:
+      - nfs-kernel-server
+      - virtualbox
 
 - name: download vagrant
   tags: vagrant
   get_url:
-    dest: ~/src/vendor/vagrant_2.2.5.deb
-    url: https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_x86_64.deb
+    dest: ~/src/vendor/vagrant_2.2.18.deb
+    url: https://releases.hashicorp.com/vagrant/2.2.18/vagrant_2.2.18_x86_64.deb
 
 - name: install vagrant
   become: True
-  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_2.2.5.deb
+  apt: deb=/home/{{ansible_ssh_user}}/src/vendor/vagrant_2.2.18.deb
 
 - name: make NFS password-free
   become: True

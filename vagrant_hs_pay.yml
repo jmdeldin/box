@@ -12,14 +12,15 @@
     - vagrant
   tasks:
     - name: install node deps
-      npm: name={{item}} global=yes
       become: True
-      with_items:
-        - gulp
-        - bower
-        # TODO: May need these:
-        # - yo
-        # - node-gyp
-        # - karma
-        # - protractor
-        # - phantomjs
+      npm:
+        global: yes
+        name:
+          - gulp
+          - bower
+          # TODO: May need these:
+          # - yo
+          # - node-gyp
+          # - karma
+          # - protractor
+          # - phantomjs

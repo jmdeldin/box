@@ -12,11 +12,12 @@
   tasks:
     - name: Install VCR packages
       become: True
-      apt: pkg={{item}} state=present
-      with_items:
-        - firmware-realtek
-        - libav-tools
-        - tmux
+      apt:
+        state: present
+        pkg:
+          - firmware-realtek
+          - libav-tools
+          - tmux
 
     - name: add non-free repo for firmware
       become: True

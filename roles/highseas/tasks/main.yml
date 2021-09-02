@@ -1,14 +1,15 @@
 - name: install system deps
-  apt: pkg={{item}} state=present
   become: True
-  with_items:
-    - libmysqlclient-dev
-    - libxml2-dev # nokogiri
-    - libxslt-dev # nokogiri
-    - mariadb-server
-    - memcached
-    - openjdk-8-jre-headless
-    - redis-server
+  apt:
+    state: present
+    pkg:
+      - libmysqlclient-dev
+      - libxml2-dev # nokogiri
+      - libxslt-dev # nokogiri
+      - mariadb-server
+      - memcached
+      - openjdk-8-jre-headless
+      - redis-server
 
 - name: Install nvm
   git:
@@ -21,6 +22,14 @@
   copy:
     src: ../templates/etc/mysql/conf.d/binlog.conf
     dest: /etc/mysql/conf.d/binlog.conf
+  become: True
+  when: binlog is defined
+  notify: restart mysql
+
+- name: Copy mysql config template over
+  copy:
+    src: ../templates/etc/mysql/conf.d/bigger_keys.cnf
+    dest: /etc/mysql/conf.d/bigger_keys.cnf
   become: True
   when: binlog is defined
   notify: restart mysql

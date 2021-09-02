@@ -1,10 +1,11 @@
 ---
 - name: install packages
   become: True
-  apt: pkg={{item}} state=present
-  with_items:
-    - aria2
-    - rtorrent
+  apt:
+    state: present
+    pkg:
+      - aria2
+      - rtorrent
 
 - name: create chromebook user
   become: True

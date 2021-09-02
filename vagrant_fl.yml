@@ -12,7 +12,8 @@
   tasks:
     - name: Install misc deps
       become: True
-      apt: pkg={{item}} state=present
-      with_items:
-        - postgresql
-        - libpq-dev
+      apt:
+        state: present
+        pkg:
+          - postgresql
+          - libpq-dev

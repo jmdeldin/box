@@ -1,11 +1,12 @@
 ---
 - name: install node
-  apt: pkg={{item}} state=present
   become: True
-  with_items:
-    - nodejs
-    - npm
   tags: [node]
+  apt:
+    state: present
+    pkg:
+      - nodejs
+      - npm
 
 - name: link node
   file: path=/usr/local/bin/node src=/usr/bin/nodejs state=link
