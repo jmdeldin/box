@@ -1,30 +1,19 @@
+# export ANSIBLE_BECOME_PASS=....
+#
+# adduser jm && usermod -aG sudo jm
+# mkdir -p /home/jm/.ssh && chmod 0700 /home/jm/.ssh && cp /root/.ssh/authorized_keys /home/jm/.ssh/authorized_keys && chmod 0600 /home/jm/.ssh/authorized_keys && chown -R jm:jm /home/jm/.ssh
+# sudo apt update
+#
 ---
 - hosts: jmdroplet
   vars:
-    default_ruby: 2.6.0
-    bundler_version: 2.0
   roles:
     - base
-    - node
-    - ruby
   tasks:
     - name: install nginx
       apt: pkg=nginx state=present
       become: True
       tags: [nginx]
-
-    - name: Ensure wheel group exists
-      group:
-        name: wheel
-        state: present
-
-    - name: Allow wheel group to have passwordless sudo
-      lineinfile:
-        dest: /etc/sudoers
-        state: present
-        regexp: '^%wheel'
-        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-      become: yes
 
     - name: install fail2ban
       apt: pkg=fail2ban state=present
@@ -59,6 +48,14 @@
         state: present
       become: yes
       notify: Restart sshd
+
+    - name: create the website directory
+      become: yes
+      file: path=/opt/apps state=directory
+
+    - name: create the website config
+      become: yes
+      file: path=/opt/nginx state=directory
 
     - name: add certbot PPA
       become: True
